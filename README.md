@@ -3,7 +3,7 @@ I am learning how to code, and I am working on making a bot that actually works 
 I am working on this bot, as a project for the near future. I want people to learn how to code, so my intention is to make a website, and let them run their own discord bots.
 They can see the code that is being ran while their discord bot is running, and very informational of how this works.
 The only file on here is the index.js file. I will be adding more files later on in the near future.
-Enjoy the horribleness of the code. Enjoy
+Enjoy the horribleness of the code. Enjoy! (Join the official bot discord server here: https://discord.gg/45Fkt7V)
 
 HOW TO RUN THE CODE!
 
