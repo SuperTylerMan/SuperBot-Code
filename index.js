@@ -13,7 +13,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = ('NzI2NDc1OTMwNDMxNzgyOTky.Xvu05A.FHLX4dBS-V7gjeF9zT4SEbUtirg'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place Bot Token Here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 
 const PREFIX = 'b/'; //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
