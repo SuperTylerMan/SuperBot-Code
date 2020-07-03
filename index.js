@@ -13,7 +13,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = ('Place Bot Token Here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place bot token here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 
 const PREFIX = 'b/'; //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
@@ -54,6 +54,7 @@ var versioninfohelp = "`b/info version` - This shows the version of the bot, and
 //This section here is the Help Section for the bot. Only the b/help section is here. 
 //We are putting this here in an embed area, so it is easier for people to see. 
 //I promise, we did not ruin the b/help command!
+//All of the variables are above at lines 36-45 for the variables of what I used. 
 
 
 bot.on('message', message =>{
