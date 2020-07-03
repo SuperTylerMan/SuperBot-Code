@@ -63,7 +63,7 @@ bot.on('message', message =>{
         case 'help':
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
-            .setTitle("Here are the commands to this bot so far.** \n *Note: We will be updating these commands as the bot progesses throughout the future...*") //This is the Help Title
+            .setTitle("**Here are the commands to this bot so far.** \n *Note: We will be updating these commands as the bot progesses throughout the future...*") //This is the Help Title
             .setDescription('**Basic Commands** \n' + pollhelp + '\n' + pinghelp + '\n' + devwebsitehelp + '\n' + invitehelp + '\n' + infohelp + '\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' +  kickhelp + '\n' + banhelp + '\n' + clearhelp + '\n More commands are coming soon...')
             
             if(!args[1]){
