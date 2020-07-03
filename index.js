@@ -17,7 +17,7 @@ const token = ('Place Bot Token Here'); //This token is important, and this is w
 
 const PREFIX = 'b/'; //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.4.2 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.5.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.4.2 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.5.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
