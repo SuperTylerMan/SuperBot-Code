@@ -13,11 +13,11 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = ('Place bot token here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place Bot Token Here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 
 const PREFIX = 'b/'; //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.5.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.51.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.5.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.51.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -39,6 +39,7 @@ var pinghelp = '-`b/ping` - Shows the ping/delay on the bot'
 var devwebsitehelp = '-`b/devwebsite` - Shows the developer website of the bot'
 var invitehelp = '-`b/invite` - An invite link to the bot \n *NOTE: THIS MOVE CAN BE VERY RISKY WHEN INVITING THIS BOT!!!*'
 var infohelp = '-`b/info help` - Shows the help section of b/info'
+var botcodehelp = '-`b/botcode` - Shows the open source code on Github for the <@726475930431782992>.'
 var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages'
 var kickhelp = '-`b/kick` - Kicks a member from the server'
 var banhelp = '-`b/ban` - Bans a member from the server'
@@ -65,7 +66,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *Note: We will be updating these commands as the bot progesses throughout the future...*") //This is the Help Title
-            .setDescription('**Basic Commands** \n' + pollhelp + '\n' + pinghelp + '\n' + devwebsitehelp + '\n' + invitehelp + '\n' + infohelp + '\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' +  kickhelp + '\n' + banhelp + '\n' + clearhelp + '\n More commands are coming soon...')
+            .setDescription('**Basic Commands** \n' + pollhelp + '\n' + pinghelp + '\n' + devwebsitehelp + '\n' + invitehelp + '\n' + infohelp + '\n' + botcodehelp + '\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' +  kickhelp + '\n' + banhelp + '\n' + clearhelp + '\n More commands are coming soon...')
             
             if(!args[1]){
                 message.channel.send(embed);
@@ -92,9 +93,12 @@ bot.on('message', message=>{
     case 'invite':
         message.channel.send('Here is an invite to invite this bot to your own discord server: https://discord.com/api/oauth2/authorize?client_id=726475930431782992&permissions=8&scope=bot *Note: There are many bugs with the bot. It is not on 24/7, and it is always under constant work.*')
         break;
+    case 'botcode':
+        message.channel.send('Here is the open source code, on github. Click on the link here ---> https://github.com/SuperTylerMan/SuperBot-Code')
+        break;
 
 //This is the b/help info section. 
-//I devided it here, so it isn't conjested.
+//It is devided it here, so it isn't conjested.
 
     case 'info':
         if(args [1] === 'help'){
@@ -117,6 +121,10 @@ bot.on('message', message=>{
             break;
 
         }
+
+//This is one of the moderation commands b/clear. 
+//The b/clear command clears messages from the server (Sometimes, people call this purge to delete messages)
+
     case 'clear':
     if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //This clear command is broken Apperantly, you can delete messages, and you do not have to be an admin. It is under fixing, and will be done soon...
     message.channel.bulkDelete(args[1]); message.channel.send('`I have deleted the messages you requested to delete.`') //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
