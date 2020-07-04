@@ -17,4 +17,10 @@ HOW TO RUN THE CODE!
 
 **Step 5:** Click open file, and add the file where your node.js is. Then you have officially opened up a new code project!
 
+**Step 6:** Copy the code from the index.js I left here, and place it into the index.js file in Visual Code Studio.
+
+**Step 7:** On Windows, hold down these 2 keys for about 0.4 seconds, *crtl + tidle key* (The Tidle key is right belolow your esc button, on the top left hand corner)
+
+**Step 8:** Type into your terminal section "node index.js" then you will recieve a message below saying the bot is online!
+
 If you had any trouble with this, I would so reccomend watching this video, because my intructions may not fully work properly. Watch here: https://www.youtube.com/watch?v=X_qg0Ut9nU8&t=2s
