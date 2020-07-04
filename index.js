@@ -13,11 +13,11 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = ('Place Bot Token Here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place the token here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run. You can find the token in your discord applications
 
 const PREFIX = 'b/'; //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.51.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.51.1 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.51.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.51.1 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -122,9 +122,17 @@ bot.on('message', message=>{
 
         }
 
+    }
+
+})    
+
 //This is one of the moderation commands b/clear. 
 //The b/clear command clears messages from the server (Sometimes, people call this purge to delete messages)
 
+bot.on('message', message =>{
+    let args = message.content.substring(PREFIX.length).split (" ");
+
+    switch(args[0]){
     case 'clear':
     if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //This clear command is broken Apperantly, you can delete messages, and you do not have to be an admin. It is under fixing, and will be done soon...
     message.channel.bulkDelete(args[1]); message.channel.send('`I have deleted the messages you requested to delete.`') //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
