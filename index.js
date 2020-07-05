@@ -13,11 +13,11 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = ('Place Bot Token Here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run. You can find the bot token in your discord applications
+const token = ('Place Bot Token Here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 
-const PREFIX = 'b/' //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
+const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.51.2 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.52.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.51.2 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.52.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -49,8 +49,8 @@ var banhelp = '-`b/ban` - Bans a member from the server'
 //There are variables here for the b/info help command, so the command, when i add more later, isn't conjested.
 //It is a bit broken for some reason, and the code isn't telling me why. So, I honestly don't know how to fix this. I read over the code I did ealier, and it isn't helping
 
-var discordinfohelp = "`b/info discord` - This shows the official discord server for the bot, where all the code, and all of the latest updates of the bot will show."
-var versioninfohelp = "`b/info version` - This shows the version of the bot, and a breif description of the bot"
+var discordinfohelp = "-`b/info discord` - This shows the official discord server for the bot, where all the code, and all of the latest updates of the bot will show."
+var versioninfohelp = "-`b/info version` - This shows the version of the bot, and a breif description of the bot"
 
 //This section here is the Help Section for the bot. Only the b/help section is here. 
 //We are putting this here in an embed area, so it is easier for people to see. 
@@ -111,9 +111,17 @@ bot.on('message', message =>{
     switch(args[0]){
     case 'info':
         if(args [1] === 'help'){
-            message.channel.send('Here are the commands to `b/info` \n' + discordinfohelp + '\n' + versioninfohelp + '\n ___Those are all of the commands for now___')
+            const embed = new Discord.MessageEmbed()
+            .setColor(0xFFD700)
+            .setTitle('Here are the commands to `b/info` \n')
+            .setDescription(discordinfohelp + '\n' + versioninfohelp + '\n ___Those are all of the commands for now___')
+
+            if(!args[2]){
+                message.channel.send(embed);
+                break; //This divides the code
             break;
         }
+    }
     case 'info':
         if(args [1] === 'version'){
             message.channel.send(version + ' `Note: This bot is under constant changes, and will be worked on a ton more in the future`')
