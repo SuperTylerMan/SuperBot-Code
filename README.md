@@ -5,7 +5,7 @@ They can see the code that is being ran while their discord bot is running, and 
 The only file on here is the index.js file. I will be adding more files later on in the near future.
 Enjoy the horribleness of the code. Enjoy! (Join the official bot discord server here: https://discord.gg/45Fkt7V)
 
-HOW TO RUN THE CODE!
+ # HOW TO RUN THE CODE PROPERLY
 
 **Step 1:** you are going to go to https://nodejs.org/en/ and download the reccomended version. Then, you are going to download Visual Code Studio. Download here >>>> https://code.visualstudio.com/. Set up node on your desktop, and follow intructions on how to set it up. It will create a file for you for node. We would highly reccomend for you to name your file "Discord Bot" or any file you want. This is super imporant, because when you go to command promt (cmd), you will have to type in this file name the node.js is in. 
 
@@ -19,8 +19,10 @@ HOW TO RUN THE CODE!
 
 **Step 6:** Copy the code from the index.js I left here, and place it into the index.js file in Visual Code Studio.
 
-**Step 7:** On Windows, hold down these 2 keys for about 0.4 seconds, *crtl + tidle key* (The Tidle key is right belolow your esc button, on the top left hand corner)
+**Step 7:** On Line 16, where it says "Place Bot Token Here," place your bot token there. You can find your bot token in your "Discord Applications"
 
-**Step 8:** Type into your terminal section "node index.js" then you will recieve a message below saying the bot is online!
+**Step 8:** On Windows, hold down these 2 keys for about 0.4 seconds, *crtl + tidle key* (The Tidle key is right belolow your esc button, on the top left hand corner)
+
+**Step 9:** Type into your terminal section "node index.js" then you will recieve a message below saying the bot is online!
 
 If you had any trouble with this, I would so reccomend watching this video, because my intructions may not fully work properly. Watch here: https://www.youtube.com/watch?v=X_qg0Ut9nU8&t=2s
