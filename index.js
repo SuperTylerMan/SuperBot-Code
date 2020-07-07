@@ -17,7 +17,7 @@ const token = ('Place Bot Token Here'); //This token is important, and this is w
 
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.52.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.6.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.52.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.6.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -45,13 +45,6 @@ var kickhelp = '-`b/kick` - Kicks a member from the server'
 var banhelp = '-`b/ban` - Bans a member from the server'
 //"(More bot commands coming soon as it is under development)'"
 
-//This section right here is the b/info section of the bot. All of the (args [1]) are posted on top, so the bot can run functionally without any problems. You have to do this, or else, the bot will not be able to run the commands properly
-//There are variables here for the b/info help command, so the command, when i add more later, isn't conjested.
-//It is a bit broken for some reason, and the code isn't telling me why. So, I honestly don't know how to fix this. I read over the code I did ealier, and it isn't helping
-
-var discordinfohelp = "-`b/info discord` - This shows the official discord server for the bot, where all the code, and all of the latest updates of the bot will show."
-var versioninfohelp = "-`b/info version` - This shows the version of the bot, and a breif description of the bot"
-
 //This section here is the Help Section for the bot. Only the b/help section is here. 
 //We are putting this here in an embed area, so it is easier for people to see. 
 //I promise, we did not ruin the b/help command!
@@ -69,7 +62,7 @@ bot.on('message', message =>{
             .setDescription('**Basic Commands** \n' + pollhelp + '\n' + pinghelp + '\n' + devwebsitehelp + '\n' + invitehelp + '\n' + infohelp + '\n' + botcodehelp + '\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' +  kickhelp + '\n' + banhelp + '\n' + clearhelp + '\n More commands are coming soon...')
             
             if(!args[1]){
-                message.channel.send(embed);
+                message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
                 break; //This divides the code
             }
 
@@ -102,6 +95,23 @@ bot.on('message', message=>{
 
 )
 
+//This section right here is the b/info section of the bot. All of the (args [1]) are posted on top, so the bot can run functionally 
+//without any problems. You have to do this, or else, the bot will not be able to run the commands properly.
+//There are variables here for the b/info commands, so the command, when I add more later, the text doen't go one for miles on end
+//and it can still function. I could use let, but I use var instead because that is what I know for now.
+
+//This is b/info help command
+var discordinfohelp = "-`b/info discord` - Shows the official discord server for the bot, where all the code, and all of the latest updates of the bot will show."
+var versioninfohelp = "-`b/info version` - Shows the version of the bot, and a breif description of the bot"
+var aboutinfohelp = "-`b/info about` - Shows the full bot information, including open source code, and how many servers the bot is being used in"
+
+//This is the b/info about command
+
+var about1 = 'Hello, and thank you for using the <@726475930431782992>! \n This bot was made by `SuperTylerMan#4507.`'
+var versions = '**Bot Version**: ' + version + '\n **node.js Version**: 12.18.1 LTS *(downloaded on 6/26/20)* \n discord.js Version: 12.2.0'
+var codestuff = 'Open Source bot code on Github: https://github.com/SuperTylerMan/SuperBot-Code \n Official SuperBot! Discord Server: https://discord.gg/45Fkt7V'
+var extrastuff = 'That is all for now. We hope you enjoy our SuperBot! Discord bot.'
+
 //This is the b/help info section. 
 //It is devided it here, so it isn't conjested.
 
@@ -114,12 +124,11 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed()
             .setColor(0xFFD700)
             .setTitle('Here are the commands to `b/info` \n')
-            .setDescription(discordinfohelp + '\n' + versioninfohelp + '\n ___Those are all of the commands for now___')
+            .setDescription(discordinfohelp + '\n' + versioninfohelp + '\n' + aboutinfohelp + '\n ___Those are all of the commands for now___')
 
             if(!args[2]){
                 message.channel.send(embed);
                 break; //This divides the code
-            break;
         }
     }
     case 'info':
@@ -130,6 +139,11 @@ bot.on('message', message =>{
     case 'info':
         if(args[1] === 'discord'){
             message.channel.send('You can join our official discord server here, to help with the code, and help with the bot performance. Join here: https://discord.gg/45Fkt7V')
+            break;
+        }
+    case 'info':
+        if(args[1] === 'about'){
+            message.channel.send( about1 + '\n' + versions + '\n This bot is currently being used in **' + bot.guilds.cache.size +  '** discord servers. \n' + codestuff + '\n' + extrastuff)
             break;
         }
     case 'info':
@@ -153,7 +167,8 @@ bot.on('message', message =>{
     case 'clear':
     if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //This clear command is broken Apperantly, you can delete messages, and you do not have to be an admin. It is under fixing, and will be done soon...
     message.channel.bulkDelete(args[1]); message.channel.send('`I have deleted the messages you requested to delete.`') //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
-            break;
+    .then(message => message.delete({timeout: 5000}));        
+        break;
             {
 
         }
@@ -293,7 +308,6 @@ bot.on('guildMemberRemove', member =>{
 //The level XP system will be added in the Alpha Stage of the bot. 
 
 bot.login(token); //This thing must always show up here. If this bot dosen't have this coding requirement inside, the bot will not work.
-
 
 //Congradulations, you have made it to the end. I know this bot code is so bad, and so crappy.
 //If you guys want to help out my terrible code, please leave a comment on github.
