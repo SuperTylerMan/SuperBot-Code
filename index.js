@@ -17,7 +17,7 @@ const token = ('Place Bot Token Here'); //This token is important, and this is w
 
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.6.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.6.1 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.6.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.6.1 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -104,6 +104,7 @@ bot.on('message', message=>{
 var discordinfohelp = "-`b/info discord` - Shows the official discord server for the bot, where all the code, and all of the latest updates of the bot will show."
 var versioninfohelp = "-`b/info version` - Shows the version of the bot, and a breif description of the bot"
 var aboutinfohelp = "-`b/info about` - Shows the full bot information, including open source code, and how many servers the bot is being used in"
+var serversinfohelp = "-`b/info servers` - Shows how many servers the bot is being used in."
 
 //This is the b/info about command
 
@@ -124,7 +125,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed()
             .setColor(0xFFD700)
             .setTitle('Here are the commands to `b/info` \n')
-            .setDescription(discordinfohelp + '\n' + versioninfohelp + '\n' + aboutinfohelp + '\n ___Those are all of the commands for now___')
+            .setDescription(discordinfohelp + '\n' + versioninfohelp + '\n' + aboutinfohelp + '\n' + serversinfohelp + '\n ___Those are all of the commands for now___')
 
             if(!args[2]){
                 message.channel.send(embed);
@@ -145,6 +146,11 @@ bot.on('message', message =>{
         if(args[1] === 'about'){
             message.channel.send( about1 + '\n' + versions + '\n This bot is currently being used in **' + bot.guilds.cache.size +  '** discord servers. \n' + codestuff + '\n' + extrastuff)
             break;
+        }
+    case 'info':
+        if(args[1] === 'servers'){
+            message.channel.send('This bot is currently being used in **' + bot.guilds.cache.size + '** discord servers.')
+        break;
         }
     case 'info':
         if(args[0]){
