@@ -17,7 +17,7 @@ const token = ('Place Bot Token Here'); //This token is important, and this is w
 
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.6.1 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.6.2 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.6.1 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.6.2 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -33,7 +33,7 @@ bot.on('ready', () =>{
 //This was done so the help section would not be extremely complicated to find. All of it will be here, and it should be a ton
 //easier to look at and use.
 
-var moderationimportantinfo = '___Note: There are no admin permission on these commands, therefor, everyone can use it. This will be fixed once all the first steps of the BETA part, is complete.___'
+var moderationimportantinfo = '___Note: There are no admin permission on these commands, therefore, everyone can use it. This will be fixed once all the first steps of the BETA part, is complete.___'
 var pollhelp = '-`b/poll` - Creates a yes/no poll. Do b/poll, and read instructions on how to use it'
 var pinghelp = '-`b/ping` - Shows the ping/delay on the bot'
 var devwebsitehelp = '-`b/devwebsite` - Shows the developer website of the bot'
