@@ -1,4 +1,4 @@
-//This is all the basics to run the bot so it can run online.
+//This is all the basics to run the bot so it can run online. You can find all of this on the Github, when you downloaded it.
 //It starts on Line 3 and ends on line 8. Const = consistent which also means these things cannot change. 
 //There are some stuff on here like var (variable) that is used elsewhere, so that I can write it down there, without having to re-write the same thing over and over again
 //Here are the steps to use the discord bot
@@ -17,7 +17,7 @@ const token = ('Place Bot Token Here'); //This token is important, and this is w
 
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.6.2 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.7.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.6.2 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.7.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -34,15 +34,16 @@ bot.on('ready', () =>{
 //easier to look at and use.
 
 var moderationimportantinfo = '___Note: There are no admin permission on these commands, therefore, everyone can use it. This will be fixed once all the first steps of the BETA part, is complete.___'
-var pollhelp = '-`b/poll` - Creates a yes/no poll. Do b/poll, and read instructions on how to use it'
+var pollhelp = '-`b/poll` - Creates a poll for the discord members to vote on. Do b/poll, and read instructions on how to use it'
 var pinghelp = '-`b/ping` - Shows the ping/delay on the bot'
 var devwebsitehelp = '-`b/devwebsite` - Shows the developer website of the bot'
 var invitehelp = '-`b/invite` - An invite link to the bot \n *NOTE: THIS MOVE CAN BE VERY RISKY WHEN INVITING THIS BOT!!!*'
 var infohelp = '-`b/info help` - Shows the help section of b/info'
+var superbotwebsitehelp = '-`b/website` - Shows the official website of the SuperBot!'
 var botcodehelp = '-`b/botcode` - Shows the open source code on Github for the <@726475930431782992>.'
 var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages'
-var kickhelp = '-`b/kick` - Kicks a member from the server'
-var banhelp = '-`b/ban` - Bans a member from the server'
+var kickhelp = '-`b/kick <member>` - Kicks a member from the server'
+var banhelp = '-`b/ban <member>` - Bans a member from the server'
 //"(More bot commands coming soon as it is under development)'"
 
 //This section here is the Help Section for the bot. Only the b/help section is here. 
@@ -59,7 +60,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *Note: We will be updating these commands as the bot progesses throughout the future...*") //This is the Help Title
-            .setDescription('**Basic Commands** \n' + pollhelp + '\n' + pinghelp + '\n' + devwebsitehelp + '\n' + invitehelp + '\n' + infohelp + '\n' + botcodehelp + '\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' +  kickhelp + '\n' + banhelp + '\n' + clearhelp + '\n More commands are coming soon...')
+            .setDescription('**Basic Commands** \n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n **Interactive Commands** \n' + pollhelp + '\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
             
             if(!args[1]){
                 message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
@@ -89,8 +90,9 @@ bot.on('message', message=>{
     case 'botcode':
         message.channel.send('Here is the open source code, on github. Click on the link here ---> https://github.com/SuperTylerMan/SuperBot-Code')
         break;
+    case 'website':
+        message.channel.send('Here is the official site of the SuperBot! Click here: https://sites.google.com/view/superdiscordbotofficialwebsite/home')
         }
-    
     }
 
 )
@@ -101,6 +103,7 @@ bot.on('message', message=>{
 //and it can still function. I could use let, but I use var instead because that is what I know for now.
 
 //This is b/info help command
+
 var discordinfohelp = "-`b/info discord` - Shows the official discord server for the bot, where all the code, and all of the latest updates of the bot will show."
 var versioninfohelp = "-`b/info version` - Shows the version of the bot, and a breif description of the bot"
 var aboutinfohelp = "-`b/info about` - Shows the full bot information, including open source code, and how many servers the bot is being used in"
@@ -154,7 +157,7 @@ bot.on('message', message =>{
         }
     case 'info':
         if(args[0]){
-            message.channel.send('Invalid usage of command. Do `b/info help` for b/info command usage') //This message will somehow send after you said something else. I am working on fixing it, so this dosen't happen again
+            message.channel.send('Invalid usage of command. Do `b/info help` for b/info command usage') //If you use b/info and type in something wrong, this message will show up
             break;
 
         }
@@ -171,7 +174,7 @@ bot.on('message', message =>{
 
     switch(args[0]){
     case 'clear':
-    if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //This clear command is broken Apperantly, you can delete messages, and you do not have to be an admin. It is under fixing, and will be done soon...
+    if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //If you do not typ in a number, this message will show up
     message.channel.bulkDelete(args[1]); message.channel.send('`I have deleted the messages you requested to delete.`') //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
     .then(message => message.delete({timeout: 5000}));        
         break;
@@ -190,22 +193,22 @@ bot.on('message', message =>{
 
     switch(args[0]){
         case "poll":
-            const Embed = new Discord.MessageEmbed() //These are the presets to a poll from JavaScript
-            .setColor(0xFFC300) //This is a HEX of a Color
-            .setTitle("Initiate a poll") //This is the Poll Title
-            .setDescription("Do `b/poll <Poll message>`. You can make a yes or no poll, would you rather poll, or what should I play/do poll") //Poll Help description
+            const Embed = new Discord.MessageEmbed()
+            .setColor(0xFFC300)
+            .setTitle("Initiate a poll")
+            .setDescription("Do `b/poll <Poll message>` to make a poll. You can make a yes or no poll, would you rather poll, or what should I play/do poll. When you make a poll, the poll will show reaction numbers 1️⃣ and 2️⃣. So please identify what ones your using for your poll your making, so the discord users do not get confused. Everyone can use this command") //Poll Help description
 
             if(!args[1]){
-                message.channel.send(Embed);
-                break; //This divides the code
+                message.channel.send(Embed); 
+                break;
                 
             }
             
             let msgArgs = args.slice(1).join(" ");
 
             message.channel.send("**" + msgArgs + "**").then(messageReaction => {
-                messageReaction.react("👍"); //This bot only accepts this. We can change it soon if we want.
-                messageReaction.react("👎"); //These reactions here are just reactions that people can react to in Discord. 
+                messageReaction.react("1️⃣"); //messsgeReactions is what the bot will react too, when a poll is being used
+                messageReaction.react("2️⃣");
             })
 
         break;
@@ -215,6 +218,8 @@ bot.on('message', message =>{
 //This next section right here is all moderation commands. These commands help with moderation. 
 //Note: THESE COMMANDS CAN ACTUALLY BAN PEOPLE FROM OTHER SERVERS WITHOUT HAVING ADMIN PERMISSIONS.
 //The bot is a bit buggy when I sometimes do the b/kick command. If it is that way, sorry...
+
+//The first one is b/kick. This only works for members and not bots. IF YOU KICK A BOT, THE BOT WILL SHUT DOWN. With an exit code 0...
 
 bot.on('message', message => {
 
@@ -227,17 +232,17 @@ bot.on('message', message => {
 
             if(user){
                 const member = message.guild.member(user);
-                const permission = 8; //THIS IS SUPER IMPORTANT!!! IF THE BOT PERMISSIONS DOSEN'T WORK, WE HAVE AN XTRA CODE, SO THE BOT WORKS PROPERLY!!!
+                const permission = 8; //This CONST is not even being used at all. Is there a neccesary thing that this is in here at all or no???
 
                 if(member) {
-                    message.member.kick('You were kicked from the server for breaking the rules. For more info, please contact a staff member for more info.').then(() => {
+                    message.member.kick('You were kicked from the server for breaking the rules. For more info, please contact a staff member for more info.').then(() => { //Appearently, this is broken. If your kicked from the server, this message will not appear in their inbox, or, their inbox is turned off for that server. IDK why...
                         message.reply('Successfully kicked ${usertag}.') //Member.kick is the message the person gets in their Direct Messages box to let them know they have been kicked
                     }).catch(err => {
-                        message.reply('I was unable to kick that member. Please try again by using `b/kick <user>`');
+                        message.reply('I was unable to kick that member. Please try again by using `b/kick <user>`'); //Broken. Even if you said a member, or a random name that is on here, it will not show. 
                         console.log(err);
                     });
                 } else{
-                    message.reply('That user is not in the discord server.') //If someone types in the wrong name after b/kick <user>, the bot will say that this player is not in the discord server
+                    message.reply('That user is not in the discord server.') //Bot cannot respond to this message at all. It will show up on line 241 of the message up there.
 
                 }
             } else {
@@ -263,10 +268,10 @@ bot.on('message', message => {
 
             if(user){
                 const member = message.guild.member(user);
-                const permission = 8; //THIS IS SUPER IMPORTANT!!! IF THE BOT PERMISSIONS DOSEN'T WORK, WE HAVE AN XTRA CODE, SO THE BOT WORKS PROPERLY!!!
+                const permission = 8; //And this is still here. Is this even imporant???
 
                 if(member) {
-                   member.ban({ression: 'You were banned from the server because you did not follow the rules at all!'}).then (() =>{
+                   member.ban({ression: 'You were banned from the server because you did not follow the rules at all!'}).then (() =>{ //Whats a ression?? Doesn't it need to be with the b/kick too???
                         message.reply(`You have banned player ${user.tag}.`);
                    })
                 } else {
@@ -295,7 +300,7 @@ bot.on('guildMemberAdd', member =>{
 
 //This section right here is the goodbye section. It is a bit buggy, because I do not have a command where you can put this. and make
 //goodbye message on your server. 
-//I did set it for my SuperBot! Discord server, but it will be added soon to everyone. 
+//I did set it for my SuperBot! Discord server, but it will be added soon to everyone. Ill make custom commands for that soon...
 
 bot.on('guildMemberRemove', member =>{
 
@@ -305,9 +310,7 @@ bot.on('guildMemberRemove', member =>{
     channel.send(`${member} has left the official SuperBot discord server.`)
 })
 
-//This bottom part right here, if a command is not working properly, we will put code down here, and when someone tries it, it will say a
-//message saying it is under work, and being tested by developers, ect...
-//This will tell them that the command is under work, and will be in final forum soon.
+//This section here if there is a command that is not working, it will go here.
 
     //There are no commands now that have any issue right now. 
 
