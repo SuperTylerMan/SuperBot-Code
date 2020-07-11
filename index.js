@@ -17,7 +17,7 @@ const token = ('Place Bot Token Here'); //This token is important, and this is w
 
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.7.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.71.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.7.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.71.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -41,6 +41,7 @@ var invitehelp = '-`b/invite` - An invite link to the bot \n *NOTE: THIS MOVE CA
 var infohelp = '-`b/info help` - Shows the help section of b/info'
 var superbotwebsitehelp = '-`b/website` - Shows the official website of the SuperBot!'
 var botcodehelp = '-`b/botcode` - Shows the open source code on Github for the <@726475930431782992>.'
+var sayhelp = '`b/say <message>` - Repeats the message whatever you say on the bot <EX: b/say hi, the bot will say hi back>'
 var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages'
 var kickhelp = '-`b/kick <member>` - Kicks a member from the server'
 var banhelp = '-`b/ban <member>` - Bans a member from the server'
@@ -60,7 +61,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *Note: We will be updating these commands as the bot progesses throughout the future...*") //This is the Help Title
-            .setDescription('**Basic Commands** \n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n **Interactive Commands** \n' + pollhelp + '\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
+            .setDescription('**Basic Commands** \n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp +'\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
             
             if(!args[1]){
                 message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
@@ -164,7 +165,23 @@ bot.on('message', message =>{
 
     }
 
-})    
+})
+
+//This section here is the b/say section. Whatever you say in the text, the bot will repeat the message. 
+//Its another interactive commands, but a fun one. 
+
+bot.on('message', message =>{
+    let args = message.content.substring(PREFIX.length).split (" ");
+
+    switch(args[0]){
+        case 'say':
+
+            let msgArgs = args.slice(1).join(" ");
+
+            message.channel.send(msgArgs)
+        break;
+    }
+})
 
 //This is one of the moderation commands b/clear. 
 //The b/clear command clears messages from the server (Sometimes, people call this purge to delete messages)
