@@ -13,11 +13,11 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = ('Place Bot Token Here'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place Your Bot Token Here. Or else, the bot cannot run'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
 
-var version = '1.71.2 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.8.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.71.2 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.8.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -33,7 +33,7 @@ bot.on('ready', () =>{
 //This was done so the help section would not be extremely complicated to find. All of it will be here, and it should be a ton
 //easier to look at and use.
 
-var moderationimportantinfo = '___Note: There are no admin permission on these commands, therefore, everyone can use it. This will be fixed once all the first steps of the BETA part, is complete.___'
+var moderationimportantinfo = '___They now have Admin Permissions on them!! YAY!!.___'
 var pollhelp = '-`b/poll` - Creates a poll for the discord members to vote on. Do b/poll, and read instructions on how to use it'
 var pinghelp = '-`b/ping` - Shows the ping/delay on the bot'
 var devwebsitehelp = '-`b/devwebsite` - Shows the developer website of the bot'
@@ -42,9 +42,9 @@ var infohelp = '-`b/info help` - Shows the help section of b/info'
 var superbotwebsitehelp = '-`b/website` - Shows the official website of the SuperBot!'
 var botcodehelp = '-`b/botcode` - Shows the open source code on Github for the <@726475930431782992>.'
 var sayhelp = '`b/say <message>` - Repeats the message whatever you say on the bot <EX: b/say hi, the bot will say hi back>'
-var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages'
-var kickhelp = '-`b/kick <member>` - Kicks a member from the server'
-var banhelp = '-`b/ban <member>` - Bans a member from the server'
+var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages. Only people who have the permission `MANAGE MESSAGES` can use the command'
+var kickhelp = '-`b/kick <member>` - Kicks a member from the server. Only people who have the permission `KICK MEMBERS` can use the command.'
+var banhelp = '-`b/ban <member>` - Bans a member from the server. Only people who have permission `BAN MEMBERS` can use the command.'
 //"(More bot commands coming soon as it is under development)'"
 
 //This section here is the Help Section for the bot. Only the b/help section is here. 
@@ -177,6 +177,7 @@ bot.on('message', message =>{
         case 'say':
             let msgArgs = args.slice(1).join(" ");
             message.channel.send(msgArgs)
+            if(message.author.bot) return
         break;
     }
 })
@@ -189,6 +190,7 @@ bot.on('message', message =>{
 
     switch(args[0]){
     case 'clear':
+    if(message.member.permissions.has("MANAGE_MESSAGES")){ //If a member has these permissions, they can use the command
     if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //If you do not typ in a number, this message will show up
 
     let msgArgs = args.slice(1).join(" ");
@@ -196,9 +198,10 @@ bot.on('message', message =>{
     .then(message => message.delete({timeout: 5000}));        
         break;
             {
-
-        }
-    }
+            }     
+        } else {
+            message.reply("You do not have permissions to use this command."); //If no one has that permission, this message will show up. 
+    }}
 })
 
 //This section here is a poll section. Here is the code of how this things work. There will be messages along the way to help you in 
@@ -222,8 +225,8 @@ bot.on('message', message =>{
             }
             
             let msgArgs = args.slice(1).join(" ");
-
-            message.reply(`has initiated new poll! Here is the poll question. React with :one: or :two:. \n **` + msgArgs + "**").then(messageReaction => {
+            
+            message.reply(`has initiated new poll! Here is the poll question. React with :one: or :two:. \n **Poll Question:** ` + msgArgs + "\n").then(messageReaction => {
                 messageReaction.react("1️⃣"); //messsgeReactions is what the bot will react too, when a poll is being used
                 messageReaction.react("2️⃣");
             })
@@ -243,27 +246,31 @@ bot.on('message', message => {
     let args = message.content.substring(PREFIX.length).split(" ")
 
     switch (args[0]) {
-        case 'kick': 
+        case 'kick':
+            
+            if(message.member.permissions.has("KICK_MEMBERS")){
 
             const user = message.mentions.users.first();
 
+            if(args[0]);
+            message.channel.send("You need to specify a person in order to kick a member from the server. Try again by doing `b/kick <user>`.")
+
             if(user){
                 const member = message.guild.member(user);
-                const permission = 8; //This CONST is not even being used at all. Is there a neccesary thing that this is in here at all or no???
 
                 if(member) {
                     message.member.kick('You were kicked from the server for breaking the rules. For more info, please contact a staff member for more info.').then(() => { //Appearently, this is broken. If your kicked from the server, this message will not appear in their inbox, or, their inbox is turned off for that server. IDK why...
                         message.reply(`Successfully kicked ${user.tag}.`) //Member.kick is the message the person gets in their Direct Messages box to let them know they have been kicked
                     }).catch(err => {
                         message.reply('I was unable to kick that member. Please try again by using `b/kick <user>`'); //Broken. Even if you said a member, or a random name that is on here, it will not show. 
-                        console.log(err);
                     });
-                } else{
-                    message.reply('That user is not in the discord server.') //Bot cannot respond to this message at all. It will show up on line 241 of the message up there.
-
+                
+                } else {
+                    message.reply('You need to specify a person in order to kick a member from the server. Try again by doing `b/kick <user>`.') //Bot cannot respond to this message at all. It will show up on line 241 of the message up there.
+                }
                 }
             } else {
-                message.reply('*You need to specify a person in order to kick a member from the server.*') //if you just do b/kick, this message will show up
+                message.reply('You do not have permission to use this command in this discord server.') //If you dont have the permissions above, this command won't work for you.
             }
         
         break;
@@ -279,28 +286,29 @@ bot.on('message', message => {
     let args = message.content.substring(PREFIX.length).split(" ")
 
     switch (args[0]) {
-        case 'ban': //This command everyone can use. There are no admin permissions on it yet
+        case 'ban':
+        if(message.member.permissions.has("BAN_MEMBERS")){
+
+        if(args[0]);
+            message.channel.send("You need to specify a person in order to ban the person from the server. Try again by doing `b/ban <user>`.")
 
             const user = message.mentions.users.first();
 
             if(user){
                 const member = message.guild.member(user);
-                const permission = 8; //And this is still here. Is this even imporant???
 
                 if(member) {
                    member.ban({ression: 'You were banned from the server because you did not follow the rules at all!'}).then (() =>{ //Whats a ression?? Doesn't it need to be with the b/kick too???
                         message.reply(`You have banned player ${user.tag}.`);
                    })
                 } else {
-                    message.reply('That user is not in the discord server.') //If someone types in the wrong name after b/ban <user>, the bot will say that this player is not in the discord server
-
+                }
                 }
             } else {
-                message.reply('*You need to specify a person in order to ban a member from the server.*') //if you just do b/ban, this message will show up
-            }
+                message.reply('You do not have permission to use this command in this discord server.') //If you do not have that permission, you cannot use this command.
         
         break;
-    }
+    }}
 })
 
 //This section here is the welcome section. It is a bit buggy, because I do not have a command where you can put this, and make custom
