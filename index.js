@@ -13,11 +13,11 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-const token = ('Place Your Bot Token Here. Or else, the bot cannot run'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place your Bot Token Here. If the bot token isnt here, well, the bot cannot run...'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 
-const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter>/. It is not even a joke
+const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
 
-var version = '1.8.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.81.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
@@ -25,7 +25,7 @@ var help = 'This is being added soon...' //This is being added soon, when there 
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.8.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.81.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -33,13 +33,14 @@ bot.on('ready', () =>{
 //This was done so the help section would not be extremely complicated to find. All of it will be here, and it should be a ton
 //easier to look at and use.
 
-var moderationimportantinfo = '___They now have Admin Permissions on them!! YAY!!.___'
+var moderationimportantinfo = '___Note: To check what type of permissions you do have on that discord server, do `b/permissions` to see what type of admin permissions you have for that discord server.___'
 var pollhelp = '-`b/poll` - Creates a poll for the discord members to vote on. Do b/poll, and read instructions on how to use it'
 var pinghelp = '-`b/ping` - Shows the ping/delay on the bot'
 var devwebsitehelp = '-`b/devwebsite` - Shows the developer website of the bot'
 var invitehelp = '-`b/invite` - An invite link to the bot \n *NOTE: THIS MOVE CAN BE VERY RISKY WHEN INVITING THIS BOT!!!*'
 var infohelp = '-`b/info help` - Shows the help section of b/info'
 var superbotwebsitehelp = '-`b/website` - Shows the official website of the SuperBot!'
+var permissionshelp = '-`b/permissions` - Shows what type of Admin Permissions you have available on that discord server. Everyone can use this command.'
 var botcodehelp = '-`b/botcode` - Shows the open source code on Github for the <@726475930431782992>.'
 var sayhelp = '`b/say <message>` - Repeats the message whatever you say on the bot <EX: b/say hi, the bot will say hi back>'
 var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages. Only people who have the permission `MANAGE MESSAGES` can use the command'
@@ -61,7 +62,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *Note: We will be updating these commands as the bot progesses throughout the future...*") //This is the Help Title
-            .setDescription('**Basic Commands** \n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp +'\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
+            .setDescription('**Basic Commands** \n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp +'\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
             
             if(!args[1]){
                 message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
@@ -167,6 +168,33 @@ bot.on('message', message =>{
 
 })
 
+//This section here is the b/permissions section for moderation commands. If someone wants to know what commands they can use in their
+//discord server, or anothers, the bot will show up what commands they can use. 
+
+bot.on('message', message =>{
+    let args = message.content.substring(PREFIX.length).split(" ");
+    switch(args[0]){
+        case 'permissions':
+            message.reply("Here are the moderaiton commands you are allowed to use in this discord server. \n")
+        if(message.member.hasPermission('MANAGE_MESSAGES'))
+            message.channel.send("-You **DO** have permissions to use `b/clear` to clear messages from this discord server. \n")
+        else
+            message.channel.send("-You **DO NOT** have permissions to use `b/clear` to clear messages from this discord server. \n")
+        
+        if(message.member.hasPermission("KICK_MEMBERS"))
+            message.channel.send("-You **DO** have permissions to use `b/kick` to kick members from this discord server. \n")
+        else 
+            message.channel.send("-You **DO NOT** have permissions to use `b/kick` to kick members from this discord server. \n")
+        
+        if(message.member.hasPermission("BAN_MEMBERS"))
+            message.channel.send("-You **DO** have permissions to use `b/ban` to ban members on this discord server. \n")
+        else 
+            message.channel.send("-You **DO NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
+        break;        
+        }
+    }    
+)
+
 //This section here is the b/say section. Whatever you say in the text, the bot will repeat the message. 
 //Its another interactive commands, but a fun one. 
 
@@ -177,7 +205,7 @@ bot.on('message', message =>{
         case 'say':
             let msgArgs = args.slice(1).join(" ");
             message.channel.send(msgArgs)
-            if(message.author.bot) return
+            if(message.author.bot) return //This is suppose to be a command breaker. If someone uses the command, this code is suppose to stop it. Doesn't work for some reason...
         break;
     }
 })
