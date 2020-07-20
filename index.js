@@ -12,20 +12,16 @@
 
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-
-const token = ('Place your Bot Token Here. If the bot token isnt here, well, the bot cannot run...'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
-
+const token = ('Place Bot Token Here. If the bot token isnt here, well, the bot cannt run.'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-
-var version = '1.81.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
-
+var version = '1.81.2 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.81.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.81.2 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -88,6 +84,9 @@ bot.on('message', message=>{
         break;
     case 'invite':
         message.channel.send('Here is an invite to invite this bot to your own discord server: https://discord.com/api/oauth2/authorize?client_id=726475930431782992&permissions=8&scope=bot *Note: There are many bugs with the bot. It is not on 24/7, and it is always under constant work.*')
+        break;
+    case 'permission':
+        message.channel.send('Did you mean `b/permissions`?')
         break;
     case 'botcode':
         message.channel.send('Here is the open source code, on github. Click on the link here ---> https://github.com/SuperTylerMan/SuperBot-Code')
@@ -202,12 +201,18 @@ bot.on('message', message =>{
     let args = message.content.substring(PREFIX.length).split (" ");
 
     switch(args[0]){
+    case 'say':
+            if(args[1] === "b/say")
+            message.reply("**Are you trying to crash the bot from running?**")
+        break;
+        }
+
+    switch(args[0]){
         case 'say':
             let msgArgs = args.slice(1).join(" ");
             message.channel.send(msgArgs)
-            if(message.author.bot) return //This is suppose to be a command breaker. If someone uses the command, this code is suppose to stop it. Doesn't work for some reason...
         break;
-    }
+        }
 })
 
 //This is one of the moderation commands b/clear. 
@@ -362,6 +367,41 @@ bot.on('guildMemberRemove', member =>{
 
     channel.send(`${member} has left the official SuperBot discord server.`)
 })
+
+//This section here is the b/report command
+//If there is someone that is making you mad, or you need to report it, the thing goes right here.
+//It is a bit buggy, but it works.
+
+bot.on('message', message =>{
+    let args = message.content.substring(PREFIX.length).split(" ")
+
+    switch(args[0]){
+        case 'report':
+        const EMBED = new Discord.MessageEmbed()
+        .setColor(0xFFC300)
+        .setTitle("Reporting a Player")
+        .setDescription("To report a person, you need to do `b/report <username> <reason>`.")
+
+        if(!args[1]){
+            message.channel.send(EMBED)
+            break;
+        }
+
+        let msgArgs = args.slice(1).join(" ");
+        const User = message.mentions.users.first();
+        message.reply(`Report was recieved! Thank you for reporting, and we will get back to you soon...`)
+
+        const Channel = message.guild.channels.cache.find(channel => channel.name === "reports")
+        if(!Channel) return;
+
+        message.channel.send(`New Report from ${User.tag}!\n Report:` + msgArgs + '\n *The reports')
+
+        break;
+        
+    }
+})
+
+//-<Guild>.channels.create()- //This is a random note I added. 
 
 //This section here if there is a command that is not working, it will go here.
 
