@@ -12,16 +12,16 @@
 
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const token = ('Place Bot Token Here. If the bot token isnt here, well, the bot cannt run.'); //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place Bot Token Here. I dont have an .env file yet. -__-') //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.81.2 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.9.1 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
-//Lines 10-12 is important. When I start the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
+//Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.81.2 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.9.1 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -29,11 +29,11 @@ bot.on('ready', () =>{
 //This was done so the help section would not be extremely complicated to find. All of it will be here, and it should be a ton
 //easier to look at and use.
 
-var moderationimportantinfo = '___Note: To check what type of permissions you do have on that discord server, do `b/permissions` to see what type of admin permissions you have for that discord server.___'
+var moderationimportantinfo = '___Note: To check what type of permissions you do have on that discord server, do b/permissions to see what type of admin permissions you have for that discord server.___'
 var pollhelp = '-`b/poll` - Creates a poll for the discord members to vote on. Do b/poll, and read instructions on how to use it'
 var pinghelp = '-`b/ping` - Shows the ping/delay on the bot'
 var devwebsitehelp = '-`b/devwebsite` - Shows the developer website of the bot'
-var invitehelp = '-`b/invite` - An invite link to the bot \n *NOTE: THIS MOVE CAN BE VERY RISKY WHEN INVITING THIS BOT!!!*'
+var invitehelp = '-`b/invite` - An invite link to the bot \n *Note: Inviting this bot can be a bit risky at times. Invite the bot at your own risk.'
 var infohelp = '-`b/info help` - Shows the help section of b/info'
 var superbotwebsitehelp = '-`b/website` - Shows the official website of the SuperBot!'
 var permissionshelp = '-`b/permissions` - Shows what type of Admin Permissions you have available on that discord server. Everyone can use this command.'
@@ -42,6 +42,8 @@ var sayhelp = '`b/say <message>` - Repeats the message whatever you say on the b
 var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages. Only people who have the permission `MANAGE MESSAGES` can use the command'
 var kickhelp = '-`b/kick <member>` - Kicks a member from the server. Only people who have the permission `KICK MEMBERS` can use the command.'
 var banhelp = '-`b/ban <member>` - Bans a member from the server. Only people who have permission `BAN MEMBERS` can use the command.'
+var reporthelp = '-`b/report <user>` - Reports a user in that discord server.'
+var suggesthelp = '-`b/suggest` - Suggests a thing for that discord server.'
 //"(More bot commands coming soon as it is under development)'"
 
 //This section here is the Help Section for the bot. Only the b/help section is here. 
@@ -58,7 +60,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *Note: We will be updating these commands as the bot progesses throughout the future...*") //This is the Help Title
-            .setDescription('**Basic Commands** \n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp +'\n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
+            .setDescription('**Basic Commands** \n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n _ _ \n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp + '\n' + suggesthelp +'\n _ _ \n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n'+ reporthelp + '\n _ _ \n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
             
             if(!args[1]){
                 message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
@@ -174,7 +176,7 @@ bot.on('message', message =>{
     let args = message.content.substring(PREFIX.length).split(" ");
     switch(args[0]){
         case 'permissions':
-            message.reply("Here are the moderaiton commands you are allowed to use in this discord server. \n")
+            message.reply("Here are the moderation commands you are allowed to use in this discord server. \n")
         if(message.member.hasPermission('MANAGE_MESSAGES'))
             message.channel.send("-You **DO** have permissions to use `b/clear` to clear messages from this discord server. \n")
         else
@@ -299,7 +301,7 @@ bot.on('message', message => {
                     });
                 
                 } else {
-                    message.reply('You need to specify a person in order to kick a member from the server. Try again by doing `b/kick <user>`.') //Bot cannot respond to this message at all. It will show up on line 241 of the message up there.
+                    
                 }
                 }
             } else {
@@ -380,7 +382,7 @@ bot.on('message', message =>{
         const EMBED = new Discord.MessageEmbed()
         .setColor(0xFFC300)
         .setTitle("Reporting a Player")
-        .setDescription("To report a person, you need to do `b/report <username> <reason>`.")
+        .setDescription("To report a person, you need to do `b/report <username> <reason>`. You need to have a channel called #reports or else, the bot will not send the report at all.")
 
         if(!args[1]){
             message.channel.send(EMBED)
@@ -394,14 +396,47 @@ bot.on('message', message =>{
         const Channel = message.guild.channels.cache.find(channel => channel.name === "reports")
         if(!Channel) return;
 
-        message.channel.send(`New Report from ${User.tag}!\n Report:` + msgArgs + '\n *The reports')
+        Channel.send(`New Report from ${User.tag}!\n Report:` + msgArgs + '\n *The reports go like this. When someone reports, the user will be first, than the reason why they are being reported. <user> <report>*')
 
         break;
         
     }
 })
 
-//-<Guild>.channels.create()- //This is a random note I added. 
+/*
+This section here is the b/suggest command. If someone has a suggestion, it will be sent in a channel called suggestions
+where people can acutally make suggestions to your discord server. Its basiclly a copy from the b/report command. 
+*/
+
+bot.on('message', message =>{
+    let args = message.content.substring(PREFIX.length).split (" ")
+
+    switch(args[0]){
+        case 'suggest':
+        const eMBEd = new Discord.MessageEmbed()
+        .setColor(0xFFC300)
+        .setTitle("Suggesting something for the discord server")
+        .setDescription("To suggest a new thing for the discord server, do `b/suggest <suggestion>`. There should be a channel called __suggestions__ or else, the suggestion will not be sent at all in the discord server.")
+
+        if(!args[1]){
+            message.channel.send(eMBEd)
+            break;
+        }
+        
+        let msgArgs = args.slice(1).join(" ");
+        const User = message.mentions.users.first();
+        message.reply('Your suggestion has been recieved! Go to the suggestions channel, to see your suggestion! \n *if there is one...*')
+
+        const cHannel = message.guild.channels.cache.find(channel => channel.name === "suggestions")
+        if(!cHannel) return;
+
+        cHannel.send(`**New Suggestion from a user!** \n **Suggstion:** __` + msgArgs + "__ \n React to one if you like it for not. :white_check_mark: if you like it. :x: if you don't like the idea.").then(messageReaction => {
+            messageReaction.react("✅");
+            messageReaction.react("❌");
+        }) //There is no break statement here because JavaScript, and Node.js isn't happy of me using it there. So I did not leave it there. You cant est it out for yourself if you want too.
+    }
+
+})
 
 //This section here if there is a command that is not working, it will go here.
 
