@@ -12,7 +12,7 @@
 
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const token = ('Place Bot Token Here. I dont have an .env file yet. -__-') //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ('Place Bot Token Here...') //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
 var version = '1.9.1 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
@@ -227,7 +227,7 @@ bot.on('message', message =>{
     case 'clear':
     if(message.member.permissions.has("MANAGE_MESSAGES")){ //If a member has these permissions, they can use the command
     if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //If you do not typ in a number, this message will show up
-
+    
     let msgArgs = args.slice(1).join(" ");
     message.channel.bulkDelete(args[1]); message.channel.send(":x: I have deleted `" + msgArgs + " messages!`" ) //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
     .then(message => message.delete({timeout: 5000}));        
