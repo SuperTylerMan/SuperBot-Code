@@ -12,16 +12,16 @@
 
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const token = ('Place Bot Token Here... I do really need a .env file by this point. Great...') //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place your bot token here. My lord...") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.9.1 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.91.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.9.1 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.91.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -45,6 +45,67 @@ var banhelp = '-`b/ban <member>` - Bans a member from the server. Only people wh
 var reporthelp = '-`b/report <user>` - Reports a user in that discord server.'
 var suggesthelp = '-`b/suggest` - Suggests a thing for that discord server.'
 //"(More bot commands coming soon as it is under development)'"
+
+//Here are some easter eggs I added. A fun way to make the bot more pleasent... ;)
+bot.on('message', msg =>{
+    if(msg.content === 'SuperBot!'){
+        msg.reply("Hi. My prefix is b/ . Try using b/help!")
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'no u'){
+        msg.reply("no u")
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'I am so hyped!'){
+        msg.reply("I am so hyped too, do you want to play Fortnite?!")
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'ewww no'){
+        msg.reply("you make me cry :sob:")
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'I want to play Fortnite!'){
+        msg.reply("Eww. Fortnite sucks!")
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'your not fun anymore'){
+        msg.reply('Why buddy? I am just a Beta Bot!')
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'shrug'){
+        msg.reply('¯\_(ツ)_/¯')
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'idk'){
+        msg.reply('¯\_(ツ)_/¯')
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'Who wants to play Fortnite?'){
+        msg.reply("I will, I will! Whats your username?! I so love to join! I am such a huge fan of fortnite, I want to play so bad!!! Invite Ninja, invite anyone you can find! I cannot wait!!!")
+    }
+})
+
+bot.on('message', msg =>{
+    if(msg.content === 'No you suck'){
+        msg.reply("No, you suck")
+    }
+})
 
 //This section here is the Help Section for the bot. Only the b/help section is here. 
 //We are putting this here in an embed area, so it is easier for people to see. 
