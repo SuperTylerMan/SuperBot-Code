@@ -10,18 +10,18 @@
 //If it isnt, read the errors below, and fix it. If you are having trouble, go back to my github, and look at the instructions there.
 //Thanks for downloading the bot! I hope you enjoy :)
 
-const Discord = require('discord.js');
+const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const bot = new Discord.Client();
-const token = ("Place your bot token here. My lord...") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place your Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run. The .env file isnt heere
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.91.0 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.91.3 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.91.0 UNDER BETA! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. It is saying "Playing a Game" and I cannot control it regularly. 
+    bot.user.setActivity('b/help for commands. Bot Version 1.91.3 Under Beta! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -38,7 +38,7 @@ var infohelp = '-`b/info help` - Shows the help section of b/info'
 var superbotwebsitehelp = '-`b/website` - Shows the official website of the SuperBot!'
 var permissionshelp = '-`b/permissions` - Shows what type of Admin Permissions you have available on that discord server. Everyone can use this command.'
 var botcodehelp = '-`b/botcode` - Shows the open source code on Github for the <@726475930431782992>.'
-var sayhelp = '`b/say <message>` - Repeats the message whatever you say on the bot <EX: b/say hi, the bot will say hi back>'
+var sayhelp = '-`b/say <message>` - Repeats the message whatever you say on the bot <EX: b/say hi, the bot will say hi back>'
 var clearhelp = '-`b/clear <number>` - Clears a certain amount of messages. Only people who have the permission `MANAGE MESSAGES` can use the command'
 var kickhelp = '-`b/kick <member>` - Kicks a member from the server. Only people who have the permission `KICK MEMBERS` can use the command.'
 var banhelp = '-`b/ban <member>` - Bans a member from the server. Only people who have permission `BAN MEMBERS` can use the command.'
@@ -91,7 +91,7 @@ bot.on('message', msg =>{
 
 bot.on('message', msg =>{
     if(msg.content === 'idk'){
-        msg.reply('¯\_(ツ)_/¯')
+        msg.reply("¯\_(ツ)_/¯")
     }
 })
 
@@ -176,7 +176,7 @@ var serversinfohelp = "-`b/info servers` - Shows how many servers the bot is bei
 //This is the b/info about command
 
 var about1 = 'Hello, and thank you for using the <@726475930431782992>! \n This bot was made by `SuperTylerMan#4507.`'
-var versions = '**Bot Version**: ' + version + '\n **node.js Version**: 12.18.1 LTS *(downloaded on 6/26/20)* \n discord.js Version: 12.2.0'
+var versions = '**Bot Version**: ' + version + '\n **node.js Version**: 12.18.1 LTS *(downloaded on 6/26/20)* \n **discord.js Version**: 12.2.0'
 var codestuff = 'Open Source bot code on Github: https://github.com/SuperTylerMan/SuperBot-Code \n Official SuperBot! Discord Server: https://discord.gg/45Fkt7V'
 var extrastuff = 'That is all for now. We hope you enjoy our SuperBot! Discord bot.'
 
@@ -184,7 +184,7 @@ var extrastuff = 'That is all for now. We hope you enjoy our SuperBot! Discord b
 //It is devided it here, so it isn't conjested.
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split (" ");
+    let args = message.content.substring(PREFIX.length).split (" "); //length, counts how many characters there are. Prefix is b/ and it is 2 characters. That means as long as there is 2 characters in the prefix, the bot can respond to that text...
 
     switch(args[0]){
     case 'info':
@@ -294,7 +294,7 @@ bot.on('message', message =>{
     .then(message => message.delete({timeout: 5000}));        
         break;
             {
-            }     
+            }    
         } else {
             message.reply("You do not have permissions to use this command."); //If no one has that permission, this message will show up. 
     }}
@@ -498,6 +498,50 @@ bot.on('message', message =>{
     }
 
 })
+
+
+/*
+
+//THIS IS ALL IN A MESSAGE FOR AN IMORTANT REASON! The reason why it is here is because this doesn't work properly. I will leave multible messages below on what I was 
+//doing here. Thanks
+
+var suggestplease = "To suggest a new thing for the discord server, do `b/suggest suggest <suggestion>`. There should be a channel called __suggestions__ or else, the suggestion will not be sent at all in the discord server."
+//var was added here to reduce the code variable for the text...
+
+bot.on('message', message =>{
+    let args = message.content.substring(PREFIX.substring).split(" ") //length reconizes characters. 
+
+    switch(args[0]){
+        case 'suggest':
+        if(args[1] === 'suggest')
+        message.reply('Your suggestion has been recieved. Please go to to the suggestions channel to see it. \n *if there is any...*') //This will show up when a suggestion was sent
+
+        const cHANNEl = message.guild.channels.cache.find(channel => channel.name === 'suggestions') //Needs to find channel to send stuff.
+        if(!cHANNEl) return;
+
+        let msgArgs = args.slice(1).join("");{ //I put this here 3 times. I only need 1. How dumb can I be 
+        const Embeded = new Discord.MessageEmbed()
+        .setColor(0xFFC300)
+        .setTitle(`New Suggestion from user!`)
+        .setDescription(msgArgs) //msgArgs will copy whatever is in the text after PREFIX.command. 
+
+        if(!args[1]){
+            message.channel.send(Embeded) //Trying to send it in 2 channels. Well, this worked out to not work -__-
+            message.channel.send(cHANNEl)
+            break;
+            //No break here, beacause JavaScript gets mad if I put one here. yay -_-
+        }
+
+    }
+    let args = message.content.substring(PREFIX.substring).split(" ")
+    switch(args[0]){
+    case 'suggest':
+            message.channel.send("**Suggesting something for the Discord Server** \n" + suggestplease) //Trying to replicate the b/info command above
+        break;
+    }}}
+)
+*/
+
 
 //This section here if there is a command that is not working, it will go here.
 
