@@ -522,14 +522,13 @@ bot.on('message', message =>{
         let msgArgs = args.slice(1).join("");{ //I put this here 3 times. I only need 1. How dumb can I be 
         const Embeded = new Discord.MessageEmbed()
         .setColor(0xFFC300)
-        .setTitle(`New Suggestion from user!`)
+        .setTitle(`New Suggestion from user!`) //${user.tag} only works if you @ mention a user. It just does. Idk why -__-
         .setDescription(msgArgs) //msgArgs will copy whatever is in the text after PREFIX.command. 
 
         if(!args[1]){
             message.channel.send(Embeded) //Trying to send it in 2 channels. Well, this worked out to not work -__-
-            message.channel.send(cHANNEl)
+            message.channel.send(cHANNEl) //cHANNEl is where the message is suppost to send. 
             break;
-            //No break here, beacause JavaScript gets mad if I put one here. yay -_-
         }
 
     }
