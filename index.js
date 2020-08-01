@@ -12,16 +12,16 @@
 
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const bot = new Discord.Client();
-const token = ("Place your Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run. The .env file isnt heere
+const token = ("NzI2NDc1OTMwNDMxNzgyOTky.Xvd1bw.2BBGnwsM7ia71InqUDdz8N_RjKY") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.91.3 (Under Beta)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.0.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('b/help for commands. Bot Version 1.91.3 Under Beta! Join the official SuperBot! Discord Server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
+    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.0.0 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -114,7 +114,8 @@ bot.on('message', msg =>{
 
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split (" ");
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
         case 'help':
@@ -135,8 +136,8 @@ bot.on('message', message =>{
 //These are the commands for the coding for each link here. case 'ping' is a command that is b/ping
 
 bot.on('message', message=>{
-
-    let args = message.content.substring(PREFIX.length).split(" ")
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
         case 'ping':
@@ -169,14 +170,14 @@ bot.on('message', message=>{
 //This is b/info help command
 
 var discordinfohelp = "-`b/info discord` - Shows the official discord server for the bot, where all the code, and all of the latest updates of the bot will show."
-var versioninfohelp = "-`b/info version` - Shows the version of the bot, and a breif description of the bot"
+var versioninfohelp = "-`b/info versions` - Shows all of the versions of the bot, and the things that are installed on the bot."
 var aboutinfohelp = "-`b/info about` - Shows the full bot information, including open source code, and how many servers the bot is being used in"
 var serversinfohelp = "-`b/info servers` - Shows how many servers the bot is being used in."
 
 //This is the b/info about command
 
 var about1 = 'Hello, and thank you for using the <@726475930431782992>! \n This bot was made by `SuperTylerMan#4507.`'
-var versions = '**Bot Version**: ' + version + '\n **node.js Version**: 12.18.1 LTS *(downloaded on 6/26/20)* \n **discord.js Version**: 12.2.0'
+var versions = '**Bot Version**: ' + version +'\n**node.js Version**: 12.18.3 LTS *(Updated on 7/31/20 at 23:35 Eastern Time (11:35 PM))*\n**discord.js Version**: 12.2.0'
 var codestuff = 'Open Source bot code on Github: https://github.com/SuperTylerMan/SuperBot-Code \n Official SuperBot! Discord Server: https://discord.gg/45Fkt7V'
 var extrastuff = 'That is all for now. We hope you enjoy our SuperBot! Discord bot.'
 
@@ -184,7 +185,8 @@ var extrastuff = 'That is all for now. We hope you enjoy our SuperBot! Discord b
 //It is devided it here, so it isn't conjested.
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split (" "); //length, counts how many characters there are. Prefix is b/ and it is 2 characters. That means as long as there is 2 characters in the prefix, the bot can respond to that text...
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
     case 'info':
@@ -200,8 +202,8 @@ bot.on('message', message =>{
         }
     }
     case 'info':
-        if(args [1] === 'version'){
-            message.channel.send(version + ' `Note: This bot is under constant changes, and will be worked on a ton more in the future`')
+        if(args [1] === 'versions'){
+            message.channel.send("Here are all of the versions on the bot. \n" + versions + ' \n`Note: This bot is under constant changes. It is currently in the beta stages of the bot. It will be out of beta soon...`')
             break;
         }
     case 'info':
@@ -220,6 +222,11 @@ bot.on('message', message =>{
         break;
         }
     case 'info':
+        if(args[1] === 'version'){
+            message.channel.send('Did you mean `b/versions`?')
+        break;
+        }
+    case 'info':
         if(args[0]){
             message.channel.send('Invalid usage of command. Do `b/info help` for b/info command usage') //If you use b/info and type in something wrong, this message will show up
             break;
@@ -234,7 +241,8 @@ bot.on('message', message =>{
 //discord server, or anothers, the bot will show up what commands they can use. 
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split(" ");
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
     switch(args[0]){
         case 'permissions':
             message.reply("Here are the moderation commands you are allowed to use in this discord server. \n")
@@ -261,7 +269,8 @@ bot.on('message', message =>{
 //Its another interactive commands, but a fun one. 
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split (" ");
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
     case 'say':
@@ -282,7 +291,8 @@ bot.on('message', message =>{
 //The b/clear command clears messages from the server (Sometimes, people call this purge to delete messages)
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split (" ");
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
     case 'clear':
@@ -305,7 +315,8 @@ bot.on('message', message =>{
 //so that the bot dosen't bug out that much. If there is any error here, please let me know.
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split (" "); //This is what is responsible to run each command that is made for this bot. This is important because we cannot make a command without this special import to the code
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
         case "poll":
@@ -338,8 +349,8 @@ bot.on('message', message =>{
 //The first one is b/kick. This only works for members and not bots. IF YOU KICK A BOT, THE BOT WILL SHUT DOWN. With an exit code 0...
 
 bot.on('message', message => {
-
-    let args = message.content.substring(PREFIX.length).split(" ")
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch (args[0]) {
         case 'kick':
@@ -378,8 +389,8 @@ bot.on('message', message => {
 //I do not have admin permissions yet. Do not try this command at all, because or else, everyone can use it!
 
 bot.on('message', message => {
-
-    let args = message.content.substring(PREFIX.length).split(" ")
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch (args[0]) {
         case 'ban':
@@ -436,7 +447,8 @@ bot.on('guildMemberRemove', member =>{
 //It is a bit buggy, but it works.
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split(" ")
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
         case 'report':
@@ -470,7 +482,8 @@ where people can acutally make suggestions to your discord server. Its basiclly 
 */
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.length).split (" ")
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
         case 'suggest':
@@ -497,45 +510,44 @@ bot.on('message', message =>{
         }) //There is no break statement here because JavaScript, and Node.js isn't happy of me using it there. So I did not leave it there. You cant est it out for yourself if you want too.
     }
 
+
 })
 
 
 /*
-
-//THIS IS ALL IN A MESSAGE FOR AN IMORTANT REASON! The reason why it is here is because this doesn't work properly. I will leave multible messages below on what I was 
-//doing here. Thanks
-
 var suggestplease = "To suggest a new thing for the discord server, do `b/suggest suggest <suggestion>`. There should be a channel called __suggestions__ or else, the suggestion will not be sent at all in the discord server."
 //var was added here to reduce the code variable for the text...
 
 bot.on('message', message =>{
-    let args = message.content.substring(PREFIX.substring).split(" ") //length reconizes characters. 
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
         case 'suggest':
         if(args[1] === 'suggest')
-        message.reply('Your suggestion has been recieved. Please go to to the suggestions channel to see it. \n *if there is any...*') //This will show up when a suggestion was sent
+        message.reply('Your suggestion has been recieved. Please go to to the suggestions channel to see it. \n *if there is any...*')
 
-        const cHANNEl = message.guild.channels.cache.find(channel => channel.name === 'suggestions') //Needs to find channel to send stuff.
+        const cHANNEl = message.guild.channels.cache.find(channel => channel.name === 'suggestions')
         if(!cHANNEl) return;
 
-        let msgArgs = args.slice(1).join("");{ //I put this here 3 times. I only need 1. How dumb can I be 
+        let msgArgs = args.slice(1).join("");{
         const Embeded = new Discord.MessageEmbed()
         .setColor(0xFFC300)
-        .setTitle(`New Suggestion from user!`) //${user.tag} only works if you @ mention a user. It just does. Idk why -__-
-        .setDescription(msgArgs) //msgArgs will copy whatever is in the text after PREFIX.command. 
+        .setTitle(`New Suggestion from user!`)
+        .setDescription(msgArgs)
 
         if(!args[1]){
-            message.channel.send(Embeded) //Trying to send it in 2 channels. Well, this worked out to not work -__-
-            message.channel.send(cHANNEl) //cHANNEl is where the message is suppost to send. 
+            message.channel.send(Embeded)
+            message.channel.send(cHANNEl)
             break;
+            //No break here, beacause JavaScript gets mad if I put one here. yay -_-
         }
 
     }
     let args = message.content.substring(PREFIX.substring).split(" ")
     switch(args[0]){
     case 'suggest':
-            message.channel.send("**Suggesting something for the Discord Server** \n" + suggestplease) //Trying to replicate the b/info command above
+            message.channel.send("**Suggesting something for the Discord Server** \n" + suggestplease)
         break;
     }}}
 )
