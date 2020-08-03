@@ -12,16 +12,16 @@
 
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const bot = new Discord.Client();
-const token = ("Place Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place your bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run. I really need an .env file. My lord...
 const PREFIX = ('b/') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.0.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.0.2 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.0.0 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
+    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.0.2 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -79,7 +79,7 @@ bot.on('message', msg =>{
 
 bot.on('message', msg =>{
     if(msg.content === 'your not fun anymore'){
-        msg.reply('Why buddy? I am just a Beta Bot!')
+        msg.reply('Why buddy? I am just a Bot!')
     }
 })
 
@@ -297,7 +297,7 @@ bot.on('message', message =>{
     switch(args[0]){
     case 'clear':
     if(message.member.permissions.has("MANAGE_MESSAGES")){ //If a member has these permissions, they can use the command
-    if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear a message.') //If you do not typ in a number, this message will show up
+    if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear messages in that channel\n*When using command, you cannot delete more than 100 messages at once, and cannot delete messages that are over 14 weeks old.*') //If you do not typ in a number, this message will show up
     
     let msgArgs = args.slice(1).join(" ");
     message.channel.bulkDelete(args[1]); message.channel.send(":x: I have deleted `" + msgArgs + " messages!`" ) //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
