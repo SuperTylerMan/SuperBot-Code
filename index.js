@@ -297,7 +297,7 @@ bot.on('message', message =>{
     switch(args[0]){
     case 'clear':
     if(message.member.permissions.has("MANAGE_MESSAGES")){ //If a member has these permissions, they can use the command
-    if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear messages in that channel\n*When using command, you cannot delete more than 100 messages at once, and cannot delete messages that are over 14 weeks old.*') //If you do not typ in a number, this message will show up
+    if (!args [1]) return message.reply('Error clearning message. You need to do `b/clear <number>` to clear messages in that channel\n*When using command, you cannot delete more than 100 messages at once, and cannot delete messages that are over 2 weeks old.*') //If you do not typ in a number, this message will show up
     
     let msgArgs = args.slice(1).join(" ");
     message.channel.bulkDelete(args[1]); message.channel.send(":x: I have deleted `" + msgArgs + " messages!`" ) //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
