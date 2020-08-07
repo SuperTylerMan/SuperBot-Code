@@ -5,6 +5,19 @@ They can see the code that is being ran while their discord bot is running, and 
 The only file on here is the index.js file. I will be adding more files later on in the near future.
 Enjoy the horribleness of the code. Enjoy! (Join the official bot discord server here: https://discord.gg/45Fkt7V)
 
+# Bot Features
+There aren't really many features on the bot, but there are a few.
+
+#1: Repeating messages. If you do b/say <message>, the bot will repeat that message back to you. Just a fun way to keep the bot interactive. 
+
+#2: Reporting. Most bots don't have a feature like that. If you need to report someone, you can report it. Do b/report <user> <reason>. Its a bit disorganized, I know, but it works alright. You do need a #reports channel or else, the bot cannot send the report in.
+
+#3: Suggesting items. Some bots do have them. Some of them don't. People can suggest what they feel like, or what they want to add. People can react with a checkmark or an X mark. Check means yes, X means no. Its their opinion. You do need a #suggestions channel, or else, the bot cannot send the suggestions. Its a fun way to keep the bot a bit more entertaining. -__-
+
+#4: Moderation commands and permission checking. If you want to check what permissions you have on the bot, do b/permissions. The moderation commands are b/clear, b/kick and b/ban. You will need these permissions to use these commands, if you do not have them. For b/clear, you need to have MANAGE_MESSAGES enabled in your role. For b/kick, you need to have KICK_MEMBERS on in order to kick members. For b/ban, you need to have permissions BAN_MEMBERS in order to ban members. There is no checking yet on the bot when kicking/banning players. Sorry. That will be added soon. I promise...
+
+I can add more features. Idk yet since I suck at coding...
+
  # HOW TO RUN THE CODE PROPERLY
 
 **Step 1:** you are going to go to https://nodejs.org/en/ and download the reccomended version. Then, you are going to download Visual Studio Code. Download here >>>> https://code.visualstudio.com/. Set up node on your desktop, and follow intructions on how to set it up. It will create a file for you for node. We would highly reccomend for you to name your file "Discord Bot" or any file you want. This is super imporant, because when you go to command promt (cmd), you will have to type in this file name the node.js is in. Place your node.js file, in the computer screen where your other apps are.
