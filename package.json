@@ -4,13 +4,13 @@ installed on the smae day as node.js was installed. dotenv was installed on July
 */
 
 {
-  "name": "discord-bot", //I named it that. Just because I was following tutorials. Nothing imporant here...
+  "name": "discord-bot", 
   "version": "1.0.0",
-  "main": "index.js", //All of the main code is stored in there, and ran.
+  "main": "index.js", 
   "dependencies": {
     "discord.js": "^12.2.0", 
     "dotenv": "^8.2.0",
-    "npm": "^6.14.5" //Latest version is 6.14.6, and github wants me to update the npm file. 
+    "npm": "^6.14.6" 
   },
   "devDependencies": {},
   "scripts": {
