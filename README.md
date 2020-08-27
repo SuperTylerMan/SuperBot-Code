@@ -26,7 +26,7 @@ I can add more features. Idk yet since I suck at coding...
 
 **Step 3: READ HERE SUPER CAREFULLY, BECAUSE THIS MAY MESS UP YOUR JSON FILE!!!** After you do create your json file, the first thing will show up is *Package Name*. Place a name for that file there, or else, you cannot move ahead. You will get *Version* next. Do not edit that. Then click enter. This, you can edit if you want too, and add something neat. You do not have to do this if you want too. This will not change the bot in any way or function at all.  Then click enter. You will get an entry point called *index.js* where your code will go. DO NOT EDIT THIS AT ALL!!!! Then click enter. Then you will get *test command.* I would not reccomend to edit. Then click enter. You will get *git repository*. Do not edit this at all. Then click enter. Then, you will get *Keywords*. We do not reccomend to edit this at all. Then click enter. Then you will get *Author*. You can add your name on it if you want too. Then click enter. Then you will get your lisence. DO NOT EDIT THAT IN ANY WAY!!! Then, click enter twice. A file was now officially created for your discord bot
 
-**Step 4:** Open up visual code studio.
+**Step 4:** Open up Visual Studio Code.
 
 **Step 5:** Click open file, and add the file where your node.js is. Then you have officially opened up a new code project!
 
