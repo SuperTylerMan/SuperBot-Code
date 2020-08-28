@@ -11,17 +11,18 @@
 //Thanks for downloading the bot! I hope you enjoy :)
 
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
+const env = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place Bot Token Here...") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place Bot Toekn Here...") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.02.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.02.2 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.02.0 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
+    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.02.2 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -166,7 +167,7 @@ bot.on('message', message=>{
         message.channel.send('Here is the official site of the SuperBot! Click here: https://sites.google.com/view/superdiscordbotofficialwebsite/home')
         break;
     case 'changelog':
-        message.channel.send('**Version 1.02.0 Stage Alpha**\nWhats new??\n-New Command! b/changelog. This will show the latest bot patch notes.\n*This was done so people can check the latest patch notes, right on their server. If they want to check old patch notes, you will have to join the SuperBot! Discord Server to see archived patch notes*\n-Changed the b/help top section. Becuase of the new b/changelog command, we changed it so people can see the latest patch notes to the bot\n_ _\n-discord.js is now officially installed to 12.3.1. This patch came out on August 15th, 2020.\n-b/info about and b/info versions has changed because of the new discord.js update.\n*More updates coming soon...*\n*All code is available on GitHub! Click here --> https://github.com/SuperTylerMan/SuperBot-Code*')
+        message.channel.send('**Version 1.02.1 Stage Alpha**\nWhats new?\n--Updated b/info servers and b/info about. Now they will show how many members across discord that this bot is in.\nThis is added to the <@735329988156325950> and you can test it out there too.\nMore updates coming soon...')
         }
     }
 
@@ -223,12 +224,12 @@ bot.on('message', message =>{
         }
     case 'info':
         if(args[1] === 'about'){
-            message.channel.send( about1 + '\n' + versions + '\n This bot is currently being used in **' + bot.guilds.cache.size +  '** discord servers. \n' + codestuff + '\n' + extrastuff)
+            message.channel.send( about1 + '\n' + versions + '\nThis bot is being used in **' + bot.guilds.cache.size + '** discord servers, which is represented by **' + bot.users.cache.size + '** discord members that have this bot in their own discord server!\n' + codestuff + '\n' + extrastuff)
             break;
         }
     case 'info':
         if(args[1] === 'servers'){
-            message.channel.send('This bot is currently being used in **' + bot.guilds.cache.size + '** discord servers.')
+            message.channel.send('This bot is being used in **' + bot.guilds.cache.size + '** discord servers, which is represented by **' + bot.users.cache.size + '** discord members that have this bot in their down discord server!')
         break;
         }
     case 'info':
@@ -356,44 +357,6 @@ bot.on('message', message =>{
         break;
     }
 });
-
-//DONT ASK ME ANYTHING :) Rules
-
-var ruleesec1 = "**Chatting Rules**"
-var rulee1 = "**#1**: Do not Swear, or curse in this discord server at all!"
-var rulee2 = "**#2**: There is no bullying, Racism, discrimination, or sexualism in this discord server at all!"
-var rulee3 = "**#3**: There is no inappropriate picture posting, or video showing at all!"
-var rulee4 = "**#4**: There is no advertising at all in this discord server"
-var rulee5 = "**#5**: Do not post links that are inappropriate to this discord server (Link posting is allowed, but it cannot be your own content!)"
-var rulee51 = "**#6**: There is no NSFW (Not safe for Work) content allowed on this server at all!"
-var ruleesec2 = "**Picture Posting Rules**"
-var rulee6 = "**#1**: There is no inappropriate pictures/memes posting allowed on this discord server (Like Middle Finger, smoking, swaring, sexual meanings, ect...)"
-var rulee7 = "**#2**: There is no memes/pictures going against someone, a user, or their rights/color/religion at all."
-var rulee8 = "**#3**: Please do not post Copyrighted picture/stuff here. I don't want to get in trouble, or you to get in trouble."
-var ruleesec3 = "**Voice Chatting Rules**"
-var rulee9 = "All same rules  at chatting 100% apply to voice chatting rules."
-var rulee10 = "**#1**: When livestreaming games, there is no innapropoite games allowed. Any games that are rated ages 17 and up, should not be streamed there at all. (NSFW rule)"
-var rulee11 = "**#2**: Please try to keep it as family-friendly chatting as much as possible. No arguing, no fighting, please!"
-var funniesn = "and most importantly, have fun!"
-
-bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
-
-    switch(args[0]){
-        case 'r1u1l3_e32vNms':
-        const EMbeded = new Discord.MessageEmbed()
-        .setColor(0xFCC300)
-        .setTitle("Discord Server Rules!\n*In order to be in this discord server, you need to follow the TOS (Terms of service) and must be ages 13 or older to join.*")
-        .setDescription(ruleesec1 + '\n' + rulee1 + '\n' + rulee2 + '\n' + rulee3 + '\n' + rulee4 + '\n' + rulee5 + '\n' + rulee51 + '\n_ _\n' + ruleesec2 + '\n' + rulee6 + '\n' + rulee7 + '\n' + rulee8 + '\n_ _\n' + ruleesec3 + '\n' + rulee9 + '\n' + rulee10 + '\n' + rulee11 + '\n_ _\n' + funniesn)
-        .setThumbnail("https://cdn.discordapp.com/icons/726839584553697320/1c4336e9dac00c09fbe51ead09bb0e74.webp?size=1024")
-
-        if(!args[1]){
-            message.channel.send(EMbeded);
-            break;
-        }
-    }
-})
 
 //This next section right here is all moderation commands. These commands help with moderation. 
 //Note: THESE COMMANDS CAN ACTUALLY BAN PEOPLE FROM OTHER SERVERS WITHOUT HAVING ADMIN PERMISSIONS.
