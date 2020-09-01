@@ -11,18 +11,17 @@
 //Thanks for downloading the bot! I hope you enjoy :)
 
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
-const env = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place Bot Toekn Here...") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place Bot Token Here whent testing bot") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.02.2 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.02.2 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
+    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.1.0 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -46,6 +45,8 @@ var banhelp = '-`b/ban <member>` - Bans a member from the server. Only people wh
 var reporthelp = '-`b/report <user>` - Reports a user in that discord server.'
 var suggesthelp = '-`b/suggest` - Suggests a thing for that discord server.'
 var patchnoteshelp = '-`b/changelog` - Shows the latest patch notes version of the bot.'
+var discordserverhelp = '-`b/serverinfo` - Shows the server info, including channels, emojis, and the name of the server'
+var discordprofilehelp = '-`b/discordprofile` - Shows your own discord profile. Including your discord ID, and your name without #.'
 //"(More bot commands coming soon as it is under development)'"
 
 //Here are some easter eggs I added. A fun way to make the bot more pleasent... ;)
@@ -130,7 +131,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *This bot is going through a ton of changes withen each update. To see the latest version of each update, do `b/changelog` for the latest updates.*") //This is the Help Title
-            .setDescription('**Basic Commands** \n'+ patchnoteshelp + '\n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n _ _ \n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp + '\n' + suggesthelp +'\n _ _ \n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n'+ reporthelp + '\n _ _ \n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
+            .setDescription('**Basic Commands** \n'+ patchnoteshelp + '\n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n _ _ \n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp + '\n' + suggesthelp +'\n _ _ \n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n'+ reporthelp + '\n **Discord Profile Stuff**' + discordserverhelp + '\n' + discordprofilehelp + '\n _ _ \n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
             
             if(!args[1]){
                 message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
@@ -255,31 +256,58 @@ bot.on('message', message =>{
 
 //This section here is the b/permissions section for moderation commands. If someone wants to know what commands they can use in their
 //discord server, or anothers, the bot will show up what commands they can use. 
+//You can actually track other players permissions by now just @ them in the text! Isn't that cool?! Huh...
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+
     switch(args[0]){
         case 'permissions':
+            if(!args[1])
             message.reply("Here are the moderation commands you are allowed to use in this discord server. \n")
+            if(!args[1])
         if(message.member.hasPermission('MANAGE_MESSAGES'))
             message.channel.send("-You **DO** have permissions to use `b/clear` to clear messages from this discord server. \n")
         else
             message.channel.send("-You **DO NOT** have permissions to use `b/clear` to clear messages from this discord server. \n")
-        
+            if(!args[1])
         if(message.member.hasPermission("KICK_MEMBERS"))
             message.channel.send("-You **DO** have permissions to use `b/kick` to kick members from this discord server. \n")
         else 
             message.channel.send("-You **DO NOT** have permissions to use `b/kick` to kick members from this discord server. \n")
-        
+            if(!args[1])
         if(message.member.hasPermission("BAN_MEMBERS"))
             message.channel.send("-You **DO** have permissions to use `b/ban` to ban members on this discord server. \n")
         else 
             message.channel.send("-You **DO NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
         break;        
         }
-    }    
-)
+
+        const user = message.mentions.users.first();
+        if(user){
+            const member = message.guild.member(user);
+
+            if(member) {
+                message.reply(`here are the permissions that ${user.tag} has in this discord server. \n`)
+                if(message.member.hasPermission('MANAGE_MESSAGES'))
+                    message.channel.send("-This Player **DOES** have permissions to use `b/clear` to clear messages from this discord server. \n")
+                else
+                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/clear` to clear messages from this discord server. \n")
+                
+                if(message.member.hasPermission("KICK_MEMBERS"))
+                    message.channel.send("-This Player **DOES** have permissions to use `b/kick` to kick members from this discord server. \n")
+                else 
+                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/kick` to kick members from this discord server. \n")
+                
+                if(message.member.hasPermission("BAN_MEMBERS"))
+                    message.channel.send("-This Player **DOES** have permissions to use `b/ban` to ban members on this discord server. \n")
+                else 
+                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
+                
+        }
+    }
+})
 
 //This section here is the b/say section. Whatever you say in the text, the bot will repeat the message. 
 //Its another interactive commands, but a fun one. 
@@ -326,6 +354,61 @@ bot.on('message', message =>{
     }}
 })
 
+//This section right here is the discord profile section. This will fetch all the stuff from the server to the bot in numbers.
+//For channels, it will count Channels, Voice CHannels, and even categories! 
+//Its a bit buggy, but it displays it is a beautiful text that isnt to hard to read ;)
+
+var ServerInfo = '-All roles count is counting all roles, includng the ones that are hidden, even the roles when bot is installed.\n-All Channels count are 100% counted, even though if they are hidden or not.'
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split (/ +/)
+    let user = message.author.username
+
+    switch(args[0]){
+        case 'serverinfo':
+        const EmBEDED03 = new Discord.MessageEmbed()
+        .setColor(0xFFC300)
+        .setTitle(`Here is the server info ${user}`) 
+        .addField('Server Name:', message.guild.name) //Shows server name.
+        .addField('Rules Channel:', message.guild.rulesChannel) //If community server enabled, it will display rule channels. Otherwise, null
+        .addField('Member Count:', message.guild.memberCount) //Counts ALL members and bots.
+        .addField('Roles Count:', message.guild.roles.cache.size) //All roles including bot roles are counted.
+        .addField('Channel Count:', message.guild.channels.cache.size) //This will count channels, categories, and voice channels.
+        .addField('Custom Emojis Count:', message.guild.emojis.cache.size) //Counts only custom emojis. It doesn't display them.
+        .setFooter('-If anything says null, that means that the information could not be obtained by the bot.\n' + ServerInfo)
+
+        if(!args[1])
+        message.channel.send(EmBEDED03)
+        break;
+    }
+})
+
+//This section right here is your discord profile. It will only display the users name (without #. Sorry) and their discord users ID.
+//Its a nice feature to add. Just not super special...
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
+    let user = message.author.username
+
+    switch(args[0]){
+        case 'discordprofile':
+            const EMBEDED04 = new Discord.MessageEmbed()
+            .setColor(0xFCC300)
+            .setTitle(`Here are your discord stats ${user}`)
+            .addField('Player Name', message.author.username) //Gets username from profile without #
+            .addField('Discord ID:', message.author.id) //Gets users discord ID and shows it in message.
+            .setFooter('This is what the bot will show in discord.js')
+
+            if(!args[1])
+            message.channel.send(EMBEDED04)
+            break;
+    }
+})
+
+
+
+
 //This section here is a poll section. Here is the code of how this things work. There will be messages along the way to help you in 
 //a much less terrible way. I am brand new to JavaScript, so sorry if this code is terrible... You will see some coding is repreated here
 //so that the bot dosen't bug out that much. If there is any error here, please let me know.
@@ -357,6 +440,44 @@ bot.on('message', message =>{
         break;
     }
 });
+
+//DONT ASK ME ANYTHING :) Rules
+
+var ruleesec1 = "**Chatting Rules**"
+var rulee1 = "**#1**: Do not Swear, or curse in this discord server at all!"
+var rulee2 = "**#2**: There is no bullying, Racism, discrimination, or sexualism in this discord server at all!"
+var rulee3 = "**#3**: There is no inappropriate picture posting, or video showing at all!"
+var rulee4 = "**#4**: There is no advertising at all in this discord server"
+var rulee5 = "**#5**: Do not post links that are inappropriate to this discord server (Link posting is allowed, but it cannot be your own content!)"
+var rulee51 = "**#6**: There is no NSFW (Not safe for Work) content allowed on this server at all!"
+var ruleesec2 = "**Picture Posting Rules**"
+var rulee6 = "**#1**: There is no inappropriate pictures/memes posting allowed on this discord server (Like Middle Finger, smoking, swaring, sexual meanings, ect...)"
+var rulee7 = "**#2**: There is no memes/pictures going against someone, a user, or their rights/color/religion at all."
+var rulee8 = "**#3**: Please do not post Copyrighted picture/stuff here. I don't want to get in trouble, or you to get in trouble."
+var ruleesec3 = "**Voice Chatting Rules**"
+var rulee9 = "All same rules  at chatting 100% apply to voice chatting rules."
+var rulee10 = "**#1**: When livestreaming games, there is no innapropoite games allowed. Any games that are rated ages 17 and up, should not be streamed there at all. (NSFW rule)"
+var rulee11 = "**#2**: Please try to keep it as family-friendly chatting as much as possible. No arguing, no fighting, please!"
+var funniesn = "and most importantly, have fun!"
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    let args = message.content.substring(PREFIX.length).split (/ +/);
+
+    switch(args[0]){
+        case 'r1u1l3_e32vNms':
+        const EMbeded = new Discord.MessageEmbed()
+        .setColor(0xFCC300)
+        .setTitle("Discord Server Rules!\n*In order to be in this discord server, you need to follow the TOS (Terms of service) and must be ages 13 or older to join.*")
+        .setDescription(ruleesec1 + '\n' + rulee1 + '\n' + rulee2 + '\n' + rulee3 + '\n' + rulee4 + '\n' + rulee5 + '\n' + rulee51 + '\n_ _\n' + ruleesec2 + '\n' + rulee6 + '\n' + rulee7 + '\n' + rulee8 + '\n_ _\n' + ruleesec3 + '\n' + rulee9 + '\n' + rulee10 + '\n' + rulee11 + '\n_ _\n' + funniesn)
+        .setThumbnail("https://cdn.discordapp.com/icons/726839584553697320/1c4336e9dac00c09fbe51ead09bb0e74.webp?size=1024")
+
+        if(!args[1]){
+            message.channel.send(EMbeded);
+            break;
+        }
+    }
+})
 
 //This next section right here is all moderation commands. These commands help with moderation. 
 //Note: THESE COMMANDS CAN ACTUALLY BAN PEOPLE FROM OTHER SERVERS WITHOUT HAVING ADMIN PERMISSIONS.
@@ -463,31 +584,36 @@ bot.on('guildMemberRemove', member =>{
 //It is a bit buggy, but it works.
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
-        case 'report':
-        const EMBED = new Discord.MessageEmbed()
-        .setColor(0xFFC300)
-        .setTitle("Reporting a Player")
-        .setDescription("To report a person, you need to do `b/report <username> <reason>`. You need to have a channel called #reports or else, the bot will not send the report at all.")
+    case 'report':
+    let embeded1 = new Discord.MessageEmbed()
+    .setColor(0xFCC300)
+    .setTitle('Reporting a Player')
+    .setDescription('To report a player, do `b/report <user> <reason>`. This will be sent to the staff team. There needs to be a channel called __#reports__ or else, the report will not send at all')
 
-        if(!args[1]){
-            message.channel.send(EMBED)
-            break;
-        }
+    if(!args[1]){
+    message.channel.send(embeded1)
+    break;
+    }
 
-        let msgArgs = args.slice(1).join(" ");
-        message.reply(`Report was recieved! Thank you for reporting, and we will get back to you soon...`)
+    let msgArgs = args.slice(1).join(" ")
+    message.reply('your reoprt has been recieved! Thank you for reporting!')
+    let channel1 = message.guild.channels.cache.find(channel => channel.name === "reports")
+    if(!channel1) return;
+    let user = message.author.username
 
-        const Channel = message.guild.channels.cache.find(channel => channel.name === "reports")
-        if(!Channel) return;
+    let embed2 = new Discord.MessageEmbed()
+    .setTitle(`New report from ${user}`)
+    .setDescription('**User Report:** ' + msgArgs)
+    .setColor(0xFCC300)
+    .setFooter('Report created using the SuperBot! Try it out by doing b/help for commands.')
 
-        Channel.send(`New Report from a user!\n Report:` + msgArgs + '\n *The reports go like this. When someone reports, the user will be first, than the reason why they are being reported. <user> <report>*')
+    channel1.send(embed2)
+    break;
 
-        break;
-        
     }
 })
 
@@ -497,77 +623,42 @@ where people can acutally make suggestions to your discord server. Its basiclly 
 */
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
         case 'suggest':
-        const eMBEd = new Discord.MessageEmbed()
-        .setColor(0xFFC300)
-        .setTitle("Suggesting something for the discord server")
-        .setDescription("To suggest a new thing for the discord server, do `b/suggest <suggestion>`. There should be a channel called __suggestions__ or else, the suggestion will not be sent at all in the discord server.")
+        const embed01 = new Discord.MessageEmbed()
+        .setTitle('Suggesting Something for the Discord Server')
+        .setDescription('To suggest something for the discord server, do `b.suggest <suggestion>`. There must be a channel called __#suggestions__ or else, the suggestion will not be sent at all to the server.')
+        .setColor(0xFCC300)
 
         if(!args[1]){
-            message.channel.send(eMBEd)
-            break;
-        }
-        
-        let msgArgs = args.slice(1).join(" ");
-        const User = message.mentions.users.first();
-        message.reply('Your suggestion has been recieved! Go to the suggestions channel, to see your suggestion! \n *if there is one...*')
-
-        const cHannel = message.guild.channels.cache.find(channel => channel.name === "suggestions")
-        if(!cHannel) return;
-
-        cHannel.send(`**New Suggestion from a user!** \n **Suggstion:** __` + msgArgs + "__ \n React to one if you like it for not. :white_check_mark: if you like it. :x: if you don't like the idea.").then(messageReaction => {
-            messageReaction.react("✅");
-            messageReaction.react("❌");
-        }) //There is no break statement here because JavaScript, and Node.js isn't happy of me using it there. So I did not leave it there. You cant est it out for yourself if you want too.
-    }
-
-
-})
-
-
-/*
-var suggestplease = "To suggest a new thing for the discord server, do `b/suggest suggest <suggestion>`. There should be a channel called __suggestions__ or else, the suggestion will not be sent at all in the discord server."
-//var was added here to reduce the code variable for the text...
-
-bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
-
-    switch(args[0]){
-        case 'suggest':
-        if(args[1] === 'suggest')
-        message.reply('Your suggestion has been recieved. Please go to to the suggestions channel to see it. \n *if there is any...*')
-
-        const cHANNEl = message.guild.channels.cache.find(channel => channel.name === 'suggestions')
-        if(!cHANNEl) return;
-
-        let msgArgs = args.slice(1).join("");{
-        const Embeded = new Discord.MessageEmbed()
-        .setColor(0xFFC300)
-        .setTitle(`New Suggestion from user!`)
-        .setDescription(msgArgs)
-
-        if(!args[1]){
-            message.channel.send(Embeded)
-            message.channel.send(cHANNEl)
-            break;
-            //No break here, beacause JavaScript gets mad if I put one here. yay -_-
-        }
-
-    }
-    let args = message.content.substring(PREFIX.substring).split(" ")
-    switch(args[0]){
-    case 'suggest':
-            message.channel.send("**Suggesting something for the Discord Server** \n" + suggestplease)
+        message.channel.send(embed01)
         break;
-    }}}
-)
-*/
+        }
 
+        let msgArgs = args.slice(1).join(" ");
+        message.reply('Your suggestion was recieved. Go to #suggestions to find your suggestion there!\n*If there is one...*')
+
+        let user = message.author.username
+        const CHANNEL = message.guild.channels.cache.find(channel => channel.name === 'suggestions')
+        if(!CHANNEL)return;
+
+        const EMbed01 = new Discord.MessageEmbed()
+        .setTitle(`New Suggestion from ${user}`)
+        .setDescription('Suggestion: **' + msgArgs + '**')
+        .setColor(0xFCC300)
+        .setFooter('React with ✅ or ❌.\nSuggestion made from the SuperBot! Suggest something for the server by doing b/suggest!')
+
+        CHANNEL.send(EMbed01).then(messageReaction =>{
+        messageReaction.react("✅");
+        messageReaction.react("❌")
+        })
+        break;
+        
+    }
+})
 
 //This section here if there is a command that is not working, it will go here.
 
