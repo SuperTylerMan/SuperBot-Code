@@ -11,17 +11,18 @@
 //Thanks for downloading the bot! I hope you enjoy :)
 
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
+const env = require('dotenv');
 const bot = new Discord.Client();
-const token = ("Place Bot Token Here whent testing bot") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Plcae Bot Token Here.") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.1.1 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
 
 //Lines 10-12 is important. When I start 8the bot, the message next to console.log will show. This will tell me if the bot is 100% online.
 
 bot.on('ready', () =>{
     console.log('The SuperBot is now running online, on all discord servers!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.1.0 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
+    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.1.1 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
 })
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
@@ -215,7 +216,7 @@ bot.on('message', message =>{
     }
     case 'info':
         if(args [1] === 'versions'){
-            message.channel.send("Here are all of the versions on the bot. \n" + versions + ' \n`Note: This bot is under constant changes. It is currently in the beta stages of the bot. It will be out of beta soon...`')
+            message.channel.send("Here are all of the versions on the bot. \n" + versions + '\nAll of the other versions are available on GitHub and in file package.json.')
             break;
         }
     case 'info':
@@ -283,32 +284,8 @@ bot.on('message', message =>{
             message.channel.send("-You **DO NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
         break;        
         }
-
-        const user = message.mentions.users.first();
-        if(user){
-            const member = message.guild.member(user);
-
-            if(member) {
-                message.reply(`here are the permissions that ${user.tag} has in this discord server. \n`)
-                if(message.member.hasPermission('MANAGE_MESSAGES'))
-                    message.channel.send("-This Player **DOES** have permissions to use `b/clear` to clear messages from this discord server. \n")
-                else
-                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/clear` to clear messages from this discord server. \n")
-                
-                if(message.member.hasPermission("KICK_MEMBERS"))
-                    message.channel.send("-This Player **DOES** have permissions to use `b/kick` to kick members from this discord server. \n")
-                else 
-                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/kick` to kick members from this discord server. \n")
-                
-                if(message.member.hasPermission("BAN_MEMBERS"))
-                    message.channel.send("-This Player **DOES** have permissions to use `b/ban` to ban members on this discord server. \n")
-                else 
-                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
-                
-        }
     }
-})
-
+)
 //This section here is the b/say section. Whatever you say in the text, the bot will repeat the message. 
 //Its another interactive commands, but a fun one. 
 
@@ -630,7 +607,7 @@ bot.on('message', message =>{
         case 'suggest':
         const embed01 = new Discord.MessageEmbed()
         .setTitle('Suggesting Something for the Discord Server')
-        .setDescription('To suggest something for the discord server, do `b.suggest <suggestion>`. There must be a channel called __#suggestions__ or else, the suggestion will not be sent at all to the server.')
+        .setDescription('To suggest something for the discord server, do `b/suggest <suggestion>`. There must be a channel called __#suggestions__ or else, the suggestion will not be sent at all to the server.')
         .setColor(0xFCC300)
 
         if(!args[1]){
