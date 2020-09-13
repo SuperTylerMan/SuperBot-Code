@@ -7,10 +7,14 @@ installed on the smae day as node.js was installed. dotenv was installed on July
   "name": "discord-bot",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {
+    "dependencies": {
+    "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
-    "npm": "^6.14.8"
+    "ffmpeg-static": "^4.2.7",
+    "npm": "^6.14.8",
+    "opusscript": "0.0.7",
+    "ytdl-core": "^3.2.2"
   },
   "devDependencies": {},
   "scripts": {
