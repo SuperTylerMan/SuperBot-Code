@@ -6,9 +6,9 @@ No moderation commands, reporting, and suggesting commands are here.
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const dotenv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place Bot Token Here.") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
-const PREFIX = ('b,,' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
-var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+const token = ("NzI2NDc1OTMwNDMxNzgyOTky.Xvd1bw.G7moH7IYBW2I4oBnL6ummKeBvbI") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
+var version = '1.13.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
 
 bot.on('ready', () =>{
@@ -182,7 +182,7 @@ var serversinfohelp = "-`b/info servers` - Shows how many servers the bot is bei
 //This is the b/info about command
 
 var about1 = 'Hello, and thank you for using the <@726475930431782992>! \n This bot was made by `SuperTylerMan#4507.`'
-var versions = '**Bot Version**: ' + version +'\n**node.js Version**: 12.18.3 LTS *(Updated on 7/31/20 at 23:35 Eastern Time (11:35 PM))*\n**discord.js Version**: 12.3.1'
+var versions = '**Bot Version**: ' + version +'\n**node.js Version**: 12.18.4 LTS *(Updated on 9/15/20 (15/9/20) At 7:05 AM (7:05) Eastern Time)*\n**discord.js Version**: 12.3.1'
 var codestuff = 'Open Source bot code on Github: https://github.com/SuperTylerMan/SuperBot-Code \n Official SuperBot! Discord Server: https://discord.gg/45Fkt7V'
 var extrastuff = 'That is all for now. We hope you enjoy our SuperBot! Discord bot.'
 
