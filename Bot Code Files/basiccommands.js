@@ -6,7 +6,7 @@ No moderation commands, reporting, and suggesting commands are here.
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const dotenv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("NzI2NDc1OTMwNDMxNzgyOTky.Xvd1bw.G7moH7IYBW2I4oBnL6ummKeBvbI") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
 var version = '1.13.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
