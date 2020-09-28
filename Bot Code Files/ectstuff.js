@@ -6,8 +6,8 @@ This includes, suggestions, polls, server infos, and discord profile infos.
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const dotenv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
-const PREFIX = ('b,,' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
+const token = ("Place bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
 var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
 
@@ -21,7 +21,7 @@ bot.on('ready', () =>{
 
 var ServerInfo = '-All roles count is counting all roles, includng the ones that are hidden, even the roles when bot is installed.\n-All Channels count are 100% counted, even though if they are hidden or not.'
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
     let args = message.content.substring(PREFIX.length).split (/ +/)
     let user = message.author.username
 
@@ -181,14 +181,14 @@ where people can acutally make suggestions to your discord server. Its basiclly 
 */
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
     let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
         case 'suggest':
         const embed01 = new Discord.MessageEmbed()
         .setTitle('Suggesting Something for the Discord Server')
-        .setDescription('To suggest something for the discord server, do `b.suggest <suggestion>`. There must be a channel called __#suggestions__ or else, the suggestion will not be sent at all to the server.')
+        .setDescription('To suggest something for the discord server, do `b/suggest <suggestion>`. There must be a channel called __#suggestions__ or else, the suggestion will not be sent at all to the server.')
         .setColor(0xFCC300)
 
         if(!args[1]){
