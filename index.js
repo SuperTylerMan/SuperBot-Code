@@ -13,7 +13,7 @@
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const doenvv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("NzI2NDc1OTMwNDMxNzgyOTky.Xvd1bw.e6NLdplljdvBHgg2-XMR7NGgtJM") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place Bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
 var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
