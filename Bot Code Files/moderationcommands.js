@@ -7,7 +7,7 @@ const Discord = require('discord.js'); //without discord.js, the bot really cann
 const dotenv = require('dotenv')
 const bot = new Discord.Client();
 const token = ("Place Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
-const PREFIX = ('b,,' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
+const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
 var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
 
@@ -20,7 +20,7 @@ bot.on('ready', () =>{
 //You can actually track other players permissions by now just @ them in the text! Isn't that cool?! Huh...
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
     let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
@@ -44,31 +44,8 @@ bot.on('message', message =>{
             message.channel.send("-You **DO NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
         break;        
         }
-
-        const user = message.mentions.users.first();
-        if(user){
-            const member = message.guild.member(user);
-
-            if(member) {
-                message.reply(`here are the permissions that ${user.tag} has in this discord server. \n`)
-                if(message.member.hasPermission('MANAGE_MESSAGES'))
-                    message.channel.send("-This Player **DOES** have permissions to use `b/clear` to clear messages from this discord server. \n")
-                else
-                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/clear` to clear messages from this discord server. \n")
-                
-                if(message.member.hasPermission("KICK_MEMBERS"))
-                    message.channel.send("-This Player **DOES** have permissions to use `b/kick` to kick members from this discord server. \n")
-                else 
-                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/kick` to kick members from this discord server. \n")
-                
-                if(message.member.hasPermission("BAN_MEMBERS"))
-                    message.channel.send("-This Player **DOES** have permissions to use `b/ban` to ban members on this discord server. \n")
-                else 
-                    message.channel.send("-This Player **DOES NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
-                
-        }
     }
-})
+)
 
 //This section here is the b/say section. Whatever you say in the text, the bot will repeat the message. 
 //Its another interactive commands, but a fun one. 
@@ -86,6 +63,10 @@ bot.on('message', message =>{
 
     switch(args[0]){
         case 'say':
+            if(!args[1]){
+                message.channel.send("**Repeating Messages**\nTo repeat a message, do b/say <message> and it will repeat it for you.")
+                break;
+            }
             let msgArgs = args.slice(1).join(" ");
             message.channel.send(msgArgs)
         break;
@@ -96,7 +77,7 @@ bot.on('message', message =>{
 //The b/clear command clears messages from the server (Sometimes, people call this purge to delete messages)
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return; 
     let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
@@ -116,7 +97,7 @@ bot.on('message', message =>{
 })
 
 bot.on('message', message => {
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return; 
     let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch (args[0]) {
@@ -156,7 +137,7 @@ bot.on('message', message => {
 //I do not have admin permissions yet. Do not try this command at all, because or else, everyone can use it!
 
 bot.on('message', message => {
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return; 
     let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch (args[0]) {
@@ -190,7 +171,7 @@ bot.on('message', message => {
 //It is a bit buggy, but it works.
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
     let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
