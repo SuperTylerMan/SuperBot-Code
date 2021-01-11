@@ -13,10 +13,10 @@
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const doenvv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place Bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. This is what the bot commands will respond to, when that prefix is used. Not even a joke, this bot can respond to this <letter><letter>. It is not even a joke
-var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
-var help = 'This is being added soon...' //This is being added soon, when there is simply way to many commands, we will add this later on...
+var version = '1.2.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var help = 'This is being added soon...' //This is very unessessary
 
 
 //All files here where the code is also is at is being ran at this file too. This is super important here. If not here, the bot,
@@ -29,7 +29,7 @@ const EctStuff = require('./Bot Code Files/ectstuff') //All other commands are b
 
 bot.on('ready', () =>{
     console.log('The bot is successfully online!'); //When running the bot, after type and entering "node ." this message will appear below, saying the bot is online! There are no errors at all. The bot is 100% online
-    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.13.0 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
+    bot.user.setActivity('in ' + bot.guilds.cache.size + ' discord servers. b/help for commands. Version 1.2.0 Stage Alpha. Join our discord server: https://discord.gg/45Fkt7V') //This sets a custom status on the bot. 
 })
  
 
