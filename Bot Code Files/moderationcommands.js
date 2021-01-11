@@ -6,9 +6,9 @@ All of these commands are stored here.
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const dotenv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
-var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.2.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
 
 bot.on('ready', () =>{
@@ -19,85 +19,76 @@ bot.on('ready', () =>{
 //discord server, or anothers, the bot will show up what commands they can use. 
 //You can actually track other players permissions by now just @ them in the text! Isn't that cool?! Huh...
 
-bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
+bot.on('message', message => {
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
     let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
         case 'permissions':
-            if(!args[1])
-            message.reply("Here are the moderation commands you are allowed to use in this discord server. \n")
-            if(!args[1])
-        if(message.member.hasPermission('MANAGE_MESSAGES'))
-            message.channel.send("-You **DO** have permissions to use `b/clear` to clear messages from this discord server. \n")
-        else
-            message.channel.send("-You **DO NOT** have permissions to use `b/clear` to clear messages from this discord server. \n")
-            if(!args[1])
-        if(message.member.hasPermission("KICK_MEMBERS"))
-            message.channel.send("-You **DO** have permissions to use `b/kick` to kick members from this discord server. \n")
-        else 
-            message.channel.send("-You **DO NOT** have permissions to use `b/kick` to kick members from this discord server. \n")
-            if(!args[1])
-        if(message.member.hasPermission("BAN_MEMBERS"))
-            message.channel.send("-You **DO** have permissions to use `b/ban` to ban members on this discord server. \n")
-        else 
-            message.channel.send("-You **DO NOT** have permissions to use `b/ban` to ban members on this discord server. \n")
-        break;        
+        let embedbed02 = new Discord.MessageEmbed()
+        .setTitle('Here are the permissions you have in this discord server.')
+        .setDescription('___If True, you have permission to use command. If false, you do not have permission to use the command.___')
+        .addField('b/ban permission:', message.member.hasPermission('BAN_MEMBERS'))
+        .addField('b/kick permission:', message.member.hasPermission("KICK_MEMBERS"))
+        .addField('b/clear permission:', message.member.hasPermission("MANAGE_MESSAGES"))
+        .setFooter('This command is under works. Let us know in our support server\nif you like this change or not.')
+        .setColor(0xFCC300)
+
+        if(!args[1]){
+            message.channel.send(embedbed02)
+            break;
         }
     }
-)
+})
 
 //This section here is the b/say section. Whatever you say in the text, the bot will repeat the message. 
 //Its another interactive commands, but a fun one. 
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
     case 'say':
-            if(args[1] === "b/say")
-            message.reply("**Are you trying to crash the bot from running?**\n**I hope not...**")
-        break;
-        }
-
-    switch(args[0]){
-        case 'say':
-            if(!args[1]){
-                message.channel.send("**Repeating Messages**\nTo repeat a message, do b/say <message> and it will repeat it for you.")
-                break;
-            }
-            let msgArgs = args.slice(1).join(" ");
-            message.channel.send(msgArgs)
-        break;
-        }
+    if(!args[1]){
+    message.channel.send('**Want to repeat messages?**\nDo `b/say <message>`.')
+    break;
+    }
+    let msgArgs = args.slice(1).join(" ")
+    message.channel.send(msgArgs)
+    break;
+}
 })
 
 //This is one of the moderation commands b/clear. 
 //The b/clear command clears messages from the server (Sometimes, people call this purge to delete messages)
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type === 'dm')return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
-    case 'clear':
-    if(message.member.permissions.has("MANAGE_MESSAGES")){ //If a member has these permissions, they can use the command
-    if (!args [1]) return message.reply('Error. Cannot Clean Messages. You need to do `b/clear <number>` to clear messages in that channel\n*When using command, you cannot delete more than 100 messages at once, and cannot delete messages that are over 2 weeks old.*') //If you do not typ in a number, this message will show up
-
-    let msgArgs = args.slice(1).join(" ");
-    message.channel.bulkDelete(args[1]); message.channel.send(":x: I have deleted `" + msgArgs + " messages!`" ) //This bot can clean any message from any server without permission. It can delete a whole server channel without permission. I CANNOT MAKE THIS UP AT ALL!! LOL
-    .then(message => message.delete({timeout: 5000})); //This will delete the message in 5 seconds when the deleted message is released.        
-        break;
-            {
-            }    
+        case 'clear':
+        if(message.member.permissions.has("MANAGE_MESSAGES")){
+            if(!args[1]){
+                return message.reply('To clear messages, you need to do `b/clear <number>` to clear messages in that channel\n*When using the command, you cannot delete more than 100 messages at once, and cannot delete messages that are over 2 weeks old*\n_ _\n**IMPORTANT UPDATE!**\nWe have made a small change with this command. If there is more than 2 words/2 numbers written after the command, it will not delete. This is still being worked on, but it is a step in progress.')
+            }
+        if(!args[2]){
+            let msgArgs = args.slice(1).join(" ")
+            message.channel.bulkDelete(args[1]); message.channel.send(":x: I have deleted `" + msgArgs + "` messages!")
+            .then(message => message.delete({timeout: 5000}));
+            break;
         } else {
-            message.reply("You do not have permissions to use this command."); //If no one has that permission, this message will show up. 
-    }}
+            message.reply('I could not clear those messages because you added more words/letters/numbres into the command.')
+        }
+        } else {
+            message.reply('you do not have permissions to use b/clear command.')
+        }
+    }
 })
 
 bot.on('message', message => {
-    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return; 
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type === "dm")return; 
     let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch (args[0]) {
@@ -136,72 +127,54 @@ bot.on('message', message => {
 //Its basicly a copy from the b/kick section, just modified to be a b/ban.
 //I do not have admin permissions yet. Do not try this command at all, because or else, everyone can use it!
 
-bot.on('message', message => {
-    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
-
-    switch (args[0]) {
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+    
+    switch(args[0]){
         case 'ban':
-        if(message.member.permissions.has("BAN_MEMBERS")){
-
-        if(!args[1]);
-            message.channel.send("You need to specify a person in order to ban the person from the server. Try again by doing `b/ban <user>`.")
-
-            const user = message.mentions.users.first();
-
-            if(user){
-                const member = message.guild.member(user);
-
-                if(member) {
-                   member.ban({ression: 'You were banned from the server because you did not follow the rules at all!'}).then (() =>{ //Whats a ression?? Doesn't it need to be with the b/kick too???
-                        message.reply(`You have banned player ${user.tag}.`);
-                   })
-                } else {
-                }
-                }
-            } else {
-                message.reply('You do not have permission to use this command in this discord server.') //If you do not have that permission, you cannot use this command.
-        
-        break;
-    }}
+            message.channel.send('Sorry. This command has been temporary disabled due to problems with the command. It will be re-enabled soon. Join our support server for more info')
+            break;
+    }
 })
 
 //This section here is the b/report command
 //If there is someone that is making you mad, or you need to report it, the thing goes right here.
 //It is a bit buggy, but it works.
 
-bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
+bot.on('message', message => {
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type === 'dm')return;
     let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
     case 'report':
-    let embeded1 = new Discord.MessageEmbed()
+    let embeded01 = new Discord.MessageEmbed()
     .setColor(0xFCC300)
-    .setTitle('Reporting a Player')
-    .setDescription('To report a player, do `b/report <user> <reason>`. This will be sent to the staff team. There needs to be a channel called __#reports__ or else, the report will not send at all')
-
+    .setTitle('Reporting a person')
+    .setDescription('To report a player, do `b/report <username> <reason>`. This will be sent to the staff team. There needs to be a channel called #reports or else, the report will not send at all')
+    
     if(!args[1]){
-    message.channel.send(embeded1)
-    break;
+        message.channel.send(embeded01)
+        break;
     }
-
-    let msgArgs = args.slice(1).join(" ")
-    let msgArgs2 = args.slice(2).join(" ")
-    message.reply('your reoprt has been recieved! Thank you for reporting!')
-    let channel1 = message.guild.channels.cache.find(channel => channel.name === "reports")
-    if(!channel1) return;
+    let userArgs = args.slice(1, 2).join(" ")
+    let reasonArgs = args.slice(2).join(" ")
     let user = message.author.username
 
-    let embed2 = new Discord.MessageEmbed()
+    let reportChannel = message.guild.channels.cache.find(channel => channel.name === 'reports')
+    if(!reportChannel)return;
+
+    let embeded02 = new Discord.MessageEmbed()
     .setTitle(`New report from ${user}`)
-    .setDescription('**User:** ' + msgArgs + '\n **Report:** ' + msgArgs2)
+    .setDescription('**User:** ' + userArgs + '\n**Reason:** ' + reasonArgs)
     .setColor(0xFCC300)
-    .setFooter('Report created using the SuperBot! Try it out by doing b/help for commands.')
 
-    channel1.send(embed2)
-    break;
-
+    if(!args[2, 10000]){
+        message.reply('Your report has been sent to the staff team. Thanks for reporting!')
+        reportChannel.send(embeded02)
+    } else {
+        message.channel.send('Sadly, your report was not recieved by the staff team because there is no #reports channel.\nPlease contact the server admins/owners for more information. Thanks.')
+    } break;
     }
 })
 
