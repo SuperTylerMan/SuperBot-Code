@@ -6,9 +6,9 @@ No moderation commands, reporting, and suggesting commands are here.
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const dotenv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
-var version = '1.13.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.2.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
 
 bot.on('ready', () =>{
@@ -40,9 +40,11 @@ var suggesthelp = '-`b/suggest` - Suggests a thing for that discord server.'
 var patchnoteshelp = '-`b/changelog` - Shows the latest patch notes version of the bot.'
 var discordserverhelp = '-`b/serverinfo` - Shows the server info, including channels, emojis, and the name of the server'
 var discordprofilehelp = '-`b/discordprofile` - Shows your own discord profile. Including your discord ID, and your name without #.'
+var votehelp = '-`b/vote` - Shows you a link where you can vote for our bot on top.gg'
 //"(More bot commands coming soon as it is under development)'"
 
 //Here are some easter eggs I added. A fun way to make the bot more pleasent... ;)
+//This will most likely be removed in the 1.3.0 update of the bot due to complaints I have been getting of these being really really annoying in their own discord servers
 bot.on('message', msg =>{
     if(msg.content === 'SuperBot!'){
         msg.reply("Hi. My prefix is b/ . Try using b/help!")
@@ -124,7 +126,7 @@ bot.on('message', message =>{
             const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *This bot is going through a ton of changes withen each update. To see the latest version of each update, do `b/changelog` for the latest updates.*") //This is the Help Title
-            .setDescription('**Basic Commands** \n'+ patchnoteshelp + '\n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n _ _ \n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp + '\n' + suggesthelp +'\n _ _ \n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n'+ reporthelp + '\n_ _\n **Discord Profile Stuff** \n' + discordserverhelp + '\n' + discordprofilehelp + '\n _ _ \n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
+            .setDescription('**Basic Commands** \n'+ patchnoteshelp + '\n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n' + votehelp +'\n _ _ \n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp + '\n' + suggesthelp +'\n _ _ \n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n'+ reporthelp + '\n_ _\n **Discord Profile Stuff** \n' + discordserverhelp + '\n' + discordprofilehelp + '\n _ _ \n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
             
             if(!args[1]){
                 message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
@@ -160,9 +162,10 @@ bot.on('message', message=>{
     case 'website':
         message.channel.send('Here is the official site of the SuperBot! Click here: https://sites.google.com/view/superdiscordbotofficialwebsite/home')
         break;
-    case 'changelog':
-        message.channel.send('**Version 1.02.1 Stage Alpha**\nWhats new?\n--Updated b/info servers and b/info about. Now they will show how many members across discord that this bot is in.\nThis is added to the <@735329988156325950> and you can test it out there too.\nMore updates coming soon...')
-        }
+    case 'vote':
+        message.channel.send('Want to vote for the <@726475930431782992>?\nGo to https://top.gg/bot/726475930431782992 and vote for the SuperBot! there! Also, leave a review on there if you want to on the SuperBot!. It would really help out a lot on what we can improve for the future.')
+        break;    
+    }
     }
 
 )
@@ -182,7 +185,7 @@ var serversinfohelp = "-`b/info servers` - Shows how many servers the bot is bei
 //This is the b/info about command
 
 var about1 = 'Hello, and thank you for using the <@726475930431782992>! \n This bot was made by `SuperTylerMan#4507.`'
-var versions = '**Bot Version**: ' + version +'\n**node.js Version**: 12.18.4 LTS *(Updated on 9/15/20 (15/9/20) At 7:05 AM (7:05) Eastern Time)*\n**discord.js Version**: 12.3.1'
+var versions = '**Bot Version**: ' + version +'\n**node.js Version**: 14.5.0 LTS *(Updated on 11/1/20 (1/11/20 in other countries))*\n**discord.js Version**: 12.4.1'
 var codestuff = 'Open Source bot code on Github: https://github.com/SuperTylerMan/SuperBot-Code \n Official SuperBot! Discord Server: https://discord.gg/45Fkt7V'
 var extrastuff = 'That is all for now. We hope you enjoy our SuperBot! Discord bot.'
 
@@ -245,6 +248,32 @@ bot.on('message', message =>{
 
     }
 
+})
+
+//This section here is Changelog. This is here for the latest update for the SuperBot!
+//I tried to make it as organized as possible.
+//I explained how I organized below
+
+//VersionRelease is a release of a version. 
+//SectionRelease is just a section of each category of commands. You can find it in b/help.
+//lineRelease is just lines for that section. I divided it up to 3 per space. (It depends on how big the release is)
+
+var versionRelease = "**Version 1.15.0**"
+var section1Release = ''
+var line1Release = "Fixed 2 command issues that were having problems."
+var line2Release = "-b/suggest has now been fixed. If there is no #suggestions channel, the bot will not send a message if a suggestion has been sent. If there is a #suggestions channel, a message will be sent showing that your suggestion was sent."
+var line3Release = "-b/report has now been fixed. If there is no #reports channel, the bot will not send a message if there is a report on a user. If there is a #reports channel, a message will be send showing it was sent to the staff team."
+var line4Release = "**\nOther commands being worked on**\n-b/clear is being worked on right now. We are trying to fix it ASAP. It will be fixed and released in version 1.2.0 Stage Alpha, or 1.3.0 Stage Alpha."
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+
+    switch(args[0]){
+        case 'changelog':
+        message.channel.send(versionRelease + "\nWhat's new??\n" + line1Release + '\n' + line2Release + '\n' + line3Release + '\n' + line4Release +'\n*More updates coming soon...*')
+        break;
+    }
 })
 
 bot.login(token)
