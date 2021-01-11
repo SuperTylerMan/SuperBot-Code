@@ -8,7 +8,7 @@ const dotenv = require('dotenv')
 const bot = new Discord.Client();
 const token = ("Place bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
-var version = '1.1.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
+var version = '1.2.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
 
 bot.on('ready', () =>{
@@ -19,7 +19,7 @@ bot.on('ready', () =>{
 //For channels, it will count Channels, Voice CHannels, and even categories! 
 //Its a bit buggy, but it displays it is a beautiful text that isnt to hard to read ;)
 
-var ServerInfo = '-All roles count is counting all roles, includng the ones that are hidden, even the roles when bot is installed.\n-All Channels count are 100% counted, even though if they are hidden or not.'
+var ServerInfo = '-All roles count is counting all roles, includng the ones that are hidden, even the roles when bot is installed to discord server.\n-All Channels count are 100% counted, even if they are hidden or not.'
 bot.on('message', message =>{
     if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
     let args = message.content.substring(PREFIX.length).split (/ +/)
@@ -27,19 +27,20 @@ bot.on('message', message =>{
 
     switch(args[0]){
         case 'serverinfo':
-        const EmBEDED03 = new Discord.MessageEmbed()
+        const EmBEDED = new Discord.MessageEmbed()
         .setColor(0xFFC300)
-        .setTitle(`Here is the server info ${user}`) 
-        .addField('Server Name:', message.guild.name) //Shows server name.
-        .addField('Rules Channel:', message.guild.rulesChannel) //If community server enabled, it will display rule channels. Otherwise, null
-        .addField('Member Count:', message.guild.memberCount) //Counts ALL members and bots.
-        .addField('Roles Count:', message.guild.roles.cache.size) //All roles including bot roles are counted.
-        .addField('Channel Count:', message.guild.channels.cache.size) //This will count channels, categories, and voice channels.
-        .addField('Custom Emojis Count:', message.guild.emojis.cache.size) //Counts only custom emojis. It doesn't display them.
-        .setFooter('-If anything says null, that means that the information could not be obtained by the bot.\n' + ServerInfo)
+        .setTitle(`Here is the server info ${user}`)
+        .addField('Server Name:', message.guild.name)
+        .addField('Server Owner:', message.guild.owner)
+        .addField('Rules Channel:', message.guild.rulesChannel)
+        .addField('Server Members Count:', message.guild.memberCount + ' discord members in this server')
+        .addField('Server Roles Count:', message.guild.roles.cache.size + ' server roles in this server')
+        .addField('Channel Count:', message.guild.channels.cache.size + ' channels in this server (including categories, and voice channels. It is not super accurate. Thanks discord.js :grin: :grin: :grin:)')
+        .addField('Custom Emojis Count:', message.guild.emojis.cache.size + ' custom emojis in this server.')
+        .setFooter('-If anything says null, that means that the information could not be obtained by the bot\n' + ServerInfo)
 
         if(!args[1])
-        message.channel.send(EmBEDED03)
+        message.channel.send(EmBEDED)
         break;
     }
 })
@@ -181,41 +182,42 @@ where people can acutally make suggestions to your discord server. Its basiclly 
 */
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == "dm")return;
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type == 'dm')return;
     let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
-        case 'suggest':
-        const embed01 = new Discord.MessageEmbed()
-        .setTitle('Suggesting Something for the Discord Server')
-        .setDescription('To suggest something for the discord server, do `b/suggest <suggestion>`. There must be a channel called __#suggestions__ or else, the suggestion will not be sent at all to the server.')
-        .setColor(0xFCC300)
+    case 'suggest':
+    let embeded01 = new Discord.MessageEmbed()
+    .setTitle('Making a Suggestion')
+    .setDescription('To make a suggestion, do `b/suggest <suggestion>`. There needs to be a channel called __#suggestions__ or else, the suggestion will not send')
+    .setColor(0xFCC300)
 
-        if(!args[1]){
-        message.channel.send(embed01)
+    if(!args[1]){
+        message.channel.send(embeded01)
         break;
-        }
+    } 
+    let msgArgs = args.slice(1).join(" ")
+    let user = message.author.username
+    let SuggestionChannel = message.guild.channels.cache.find(channel => channel.name === 'suggestions')
+    if(!SuggestionChannel)return;
 
-        let msgArgs = args.slice(1).join(" ");
-        message.reply('Your suggestion was recieved. Go to #suggestions to find your suggestion there!\n*If there is one...*')
+    let embeded02 = new Discord.MessageEmbed()
+    .setTitle(`New Suggestion from ${user}!`)
+    .setDescription('Suggestion: **' + msgArgs + '**')
+    .setColor(0xFCC300)
+    .setFooter('React with ✅ or ❌.\nSuggestion made from the SuperBot! Suggest something for the server by doing b/suggest')
 
-        let user = message.author.username
-        const CHANNEL = message.guild.channels.cache.find(channel => channel.name === 'suggestions')
-        if(!CHANNEL)return;
-
-        const EMbed01 = new Discord.MessageEmbed()
-        .setTitle(`New Suggestion from ${user}`)
-        .setDescription('Suggestion: **' + msgArgs + '**')
-        .setColor(0xFCC300)
-        .setFooter('React with ✅ or ❌.\nSuggestion made from the SuperBot! Suggest something for the server by doing b/suggest!')
-
-        CHANNEL.send(EMbed01).then(messageReaction =>{
-        messageReaction.react("✅");
-        messageReaction.react("❌")
+    if(!args[2, 10000]){
+        message.reply('Your suggestion has been recieved. Go to #suggestions to find it!')
+        SuggestionChannel.send(embeded02).then(messageReaction =>{
+            messageReaction.react("✅")
+            messageReaction.react("❌") 
         })
-        break;
-        
+    } else {
+        message.channel.send('Error. Your suggestion was not sent because the server owner/admins did not set up a #suggestions channel.\nPlease contant the server admins/owner for more information. Thanks.')
+    break;
     }
+    } 
 })
 
 bot.login(token)
