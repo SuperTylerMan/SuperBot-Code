@@ -16,6 +16,8 @@ There aren't really many features on the bot, but there are a few.
 
 #4: Moderation commands and permission checking. If you want to check what permissions you have on the bot, do b/permissions. The moderation commands are b/clear, b/kick and b/ban. You will need these permissions to use these commands, if you do not have them. For b/clear, you need to have MANAGE_MESSAGES enabled in your role. For b/kick, you need to have KICK_MEMBERS on in order to kick members. For b/ban, you need to have permissions BAN_MEMBERS in order to ban members. There is no checking yet on the bot when kicking/banning players. Sorry. That will be added soon. I promise...
 
+#5: Checking minecraft server status. If your favorite server is online, you can check your favorite minecraft server in discord before joining, without having to log into minecraft. (NOTE: This only works for Minecraft Java Edition)
+
 I can add more features. Idk yet since I suck at coding...
 
  # HOW TO RUN THE CODE PROPERLY
