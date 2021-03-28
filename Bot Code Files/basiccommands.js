@@ -1,32 +1,33 @@
 /*
-This is where all easter eggs, and all of the basic commands like b/info commands, and basic b/help commands.
-No moderation commands, reporting, and suggesting commands are here.
+This is the file basiccommands.js. This file here holds the super basic commands in this bot.
+This file is really easy to understand what is going on. 
 */
-
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const dotenv = require('dotenv')
 const bot = new Discord.Client();
-const token = ("Place bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place Bot Toke Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
-var version = '1.2.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
-var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
+var version = '1.3.2 (Stage Alpha)'; 
+var help = 'This is being added soon...' 
+var uptime = Date.now(); //Counts in 'ms'. Part of the uptime command
 
 bot.on('ready', () =>{
-    console.log('basiccommands.js file is running.')
+    console.log('basiccommands.js file is running.') //Shows in the terminal when this file is running. 
 })
 
 
 
 //This section here is all var (variables) for the b/help command. This will reduce the amount of writing that needs to be written in command
-//and can always be re-adjusted later.
-//This was done so the help section would not be extremely complicated to find. All of it will be here, and it should be a ton
-//easier to look at and use.
+//and reduce scrolling at the same time.
+//and can always be re-adjusted at anytime.
+//This was done so the help section would not be extremely complicated to find, and make it way easier for me, and the person using it without
+//or looking at it, without having to scroll left and right for a super super long time
 
 var moderationimportantinfo = '___Note: To check what type of permissions you do have on that discord server, do b/permissions to see what type of admin permissions you have for that discord server.___'
 var pollhelp = '-`b/poll` - Creates a poll for the discord members to vote on. Do b/poll, and read instructions on how to use it'
 var pinghelp = '-`b/ping` - Shows the ping/delay on the bot'
 var devwebsitehelp = '-`b/devwebsite` - Shows the developer website of the bot'
-var invitehelp = '-`b/invite` - An invite link to the bot \n *Note: Inviting this bot can be a bit risky at times. Invite the bot at your own risk.'
+var invitehelp = '-`b/invite` - An invite link to the bot'
 var infohelp = '-`b/info help` - Shows the help section of b/info'
 var superbotwebsitehelp = '-`b/website` - Shows the official website of the SuperBot!'
 var permissionshelp = '-`b/permissions` - Shows what type of Admin Permissions you have available on that discord server. Everyone can use this command.'
@@ -41,75 +42,13 @@ var patchnoteshelp = '-`b/changelog` - Shows the latest patch notes version of t
 var discordserverhelp = '-`b/serverinfo` - Shows the server info, including channels, emojis, and the name of the server'
 var discordprofilehelp = '-`b/discordprofile` - Shows your own discord profile. Including your discord ID, and your name without #.'
 var votehelp = '-`b/vote` - Shows you a link where you can vote for our bot on top.gg'
+var mcserverstatushelp = '-`b/mcserverstatus` - Shows the server status for Minecraft Java Servers'
+var uptimehelp = '-`b/uptime` - Shows the uptime for the SuperBot! (Only shows in minutes)'
+var announcementhelp = '-`b/announcement` - Sends an announcement in an embed, instead of traditional text.'
+var sayembedhelp = '-`b/sayembed <message> ` - Repeats a message in a nice embed form'
 //"(More bot commands coming soon as it is under development)'"
 
-//Here are some easter eggs I added. A fun way to make the bot more pleasent... ;)
-//This will most likely be removed in the 1.3.0 update of the bot due to complaints I have been getting of these being really really annoying in their own discord servers
-bot.on('message', msg =>{
-    if(msg.content === 'SuperBot!'){
-        msg.reply("Hi. My prefix is b/ . Try using b/help!")
-    }
-})
 
-bot.on('message', msg =>{
-    if(msg.content === 'no u'){
-        msg.reply("no u")
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'I am so hyped!'){
-        msg.reply("I am so hyped too, do you want to play Fortnite?!")
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'ewww no'){
-        msg.reply("you make me cry :sob:")
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'I want to play Fortnite!'){
-        msg.reply("Eww. Fortnite sucks!")
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'your not fun anymore'){
-        msg.reply('Why buddy? I am just a Bot!')
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'shrug'){
-        msg.reply('¯\_(ツ)_/¯')
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'idk'){
-        msg.reply("¯\_(ツ)_/¯")
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'Who wants to play Fortnite?'){
-        msg.reply("I will, I will! Whats your username?! I so love to join! I am such a huge fan of fortnite, I want to play so bad!!! Invite Ninja, invite anyone you can find! I cannot wait!!!")
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'No you suck'){
-        msg.reply("No, you suck")
-    }
-})
-
-bot.on('message', msg =>{
-    if(msg.content === 'b/'){
-        msg.reply("Were you trying to use me? The <@726475930431782992>\nMy prefix is b/ Try b/help for a list of commands")
-    }
-})
 
 //This section here is the Help Section for the bot. Only the b/help section is here. 
 //We are putting this here in an embed area, so it is easier for people to see. 
@@ -117,22 +56,66 @@ bot.on('message', msg =>{
 //All of the variables are above at lines 36-45 for the variables of what I used. 
 
 
-bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
+bot.on('message', message =>{ //Start a new command
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return; //Variables I set how the command is ran
+    let args = message.content.substring(PREFIX.length).split (/ +/); //args (or Arguments) for text, and to run the command properly
 
-    switch(args[0]){
-        case 'help':
-            const embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
+    switch(args[0]){ //When args is 0, that means the very first word (or a clump together) will only activate if the first word is detected by the code
+        case 'help': //Command name. When typed it in chat, the line of code will read
+            let embed = new Discord.MessageEmbed() //These are the presets to a embed in JavaScript
             .setColor(0xFFD700) //This is a HEX of a Color
             .setTitle("**Here are the commands to this bot so far.** \n *This bot is going through a ton of changes withen each update. To see the latest version of each update, do `b/changelog` for the latest updates.*") //This is the Help Title
-            .setDescription('**Basic Commands** \n'+ patchnoteshelp + '\n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n' + votehelp +'\n _ _ \n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp + '\n' + suggesthelp +'\n _ _ \n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n'+ reporthelp + '\n_ _\n **Discord Profile Stuff** \n' + discordserverhelp + '\n' + discordprofilehelp + '\n _ _ \n **Ect commands (Not Catagorized)** \n' + infohelp + '\n *More commands are coming soon...*')
-            
-            if(!args[1]){
-                message.channel.send(embed); //This is how the embed will send. If this is not here, the embed message I made above cannot send
-                break; //This divides the code
-            }
+            .setDescription('**Basic Commands** \n'+ patchnoteshelp + '\n' + pinghelp + '\n' + invitehelp + '\n' + botcodehelp + '\n' + devwebsitehelp + '\n' + superbotwebsitehelp + '\n' + votehelp  + '\n' + uptimehelp +'\n _ _ \n **Interactive Commands** \n' + pollhelp + '\n' + sayhelp + '\n '+ sayembedhelp + '\n' + suggesthelp +'\n _ _ \n **Moderation Commands:** \n' + moderationimportantinfo + '\n' + permissionshelp + '\n' + clearhelp + '\n' + kickhelp + '\n' + banhelp + '\n'+ reporthelp + '\n' + announcementhelp)
+            message.channel.send(embed) //This sends the message from the embed to that channel of where the command is taken place it
+            //Other methos like messsage.reply which @ the user when sending a message would work too. 
 
+            //This embed has gotten so big, I needed to create a new embed to support the newer commands
+
+            let embed2 = new Discord.MessageEmbed()
+            .setColor(0xFCC300)
+            .setDescription('**Discord Stuff** \n' + discordserverhelp + '\n' + discordprofilehelp + '\n _ _ \n **Ect commands (Not Catagorized)** \n' + infohelp + '\n' + mcserverstatushelp + '\n *More commands are coming soon...*')
+            message.channel.send(embed2)
+            break; //After the command is ran, break, or return will stop the code from reading pass this point after it is ran. If this wasnt here, the entire code for this page would be read until it got to the end
+            }
+})
+
+//This is the new ping commmand. Now in a really nice embed!
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type === 'dm')return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+    let user = message.author.username //Gets player username (not nick)
+    let userhastag = message.author.discriminator //Gets player's hastag
+
+    switch(args[0]){
+        case 'ping':
+        let pingemebded = new Discord.MessageEmbed()
+        .setDescription('**Pong :ping_pong:**')
+        .addField('Ping:', Math.abs(message.createdTimestamp - Date.now()) + 'ms.') //That is a very basic ping.
+        .addField('How ping works:','The ping of the bot is measured in miliseconds (ms). If the bot takes 158ms to respond, the delay is 0.158 seconds.')
+        .setFooter('Pinged by ' + user + '#' + userhastag +'.')
+        .setColor(0xFCC300)
+
+        if(!args[1]){
+            message.channel.send(pingemebded)
+            
+        }
+    }
+})
+
+//Command b/uptime. Uptime only counts in minutes
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+
+    switch(args[0]){
+        case 'uptime':
+            let now = Date.now() //Starts counting when the file starts running
+            let ms = (now - uptime) //Gets both of now and uptime to display the time in ms
+            let secround = (Math.round(ms / 1000)) //Rounds the milliseconds (ms) to seconds by dividing by 1000
+            let min = (Math.round(secround / 60)) //Rounds the seconds to minutes by dividing by 60
+            message.channel.send(`The bot has been online for ${min} minutes.\n*Note: The uptime only counts in minutes as of right now. We are working on a better coded version of uptime in the later updates. More soon...*`)
     }
 })
 
@@ -144,9 +127,6 @@ bot.on('message', message=>{
     let args = message.content.substring(PREFIX.length).split (/ +/);
 
     switch(args[0]){
-        case 'ping':
-            message.channel.send("Pong! :ping_pong: Ping: "  + Math.abs(message.createdTimestamp - Date.now()) + 'ms. \n (Ping shows the delay of the bot when you type the command. If the ping is 158ms, the bot will take 0.158 seconds for the bot to respond)'); //This measures the ping of the bot, when command is used.
-            break;
     case 'devwebsite':
         message.channel.send('Here is a link to SuperTylerMan Website, the developer of the bot: https://sites.google.com/view/stm-new-official-website/stm-home-page')
         break;
@@ -210,7 +190,7 @@ bot.on('message', message =>{
         }
     }
     case 'info':
-        if(args [1] === 'versions'){
+        if(args [1] === 'versions'){ //When 2nd word clump is read, it will send the command. 
             message.channel.send("Here are all of the versions on the bot. \n" + versions + ' \n`Note: This bot is under constant changes. It is currently in the beta stages of the bot. It will be out of beta soon...`')
             break;
         }
@@ -240,7 +220,7 @@ bot.on('message', message =>{
         break;
         }
     case 'info':
-        if(args[0]){
+        if(args[0]){ //If someone tries using the command, and got an error using it, display this message here indicating you used the command wrong in some type of way
             message.channel.send('Invalid usage of command. Do `b/info help` for b/info command usage') //If you use b/info and type in something wrong, this message will show up
             break;
 
@@ -257,6 +237,7 @@ bot.on('message', message =>{
 //VersionRelease is a release of a version. 
 //SectionRelease is just a section of each category of commands. You can find it in b/help.
 //lineRelease is just lines for that section. I divided it up to 3 per space. (It depends on how big the release is)
+//I try to update it, but I never really update it.
 
 var versionRelease = "**Version 1.15.0**"
 var section1Release = ''
@@ -276,4 +257,5 @@ bot.on('message', message =>{
     }
 })
 
-bot.login(token)
+bot.login(token) //Bot logins using the token. You can place the token down here if you want too
+//You made it to the end of the basiccommands.js file. Check out some other files if you want to see some other code as well
