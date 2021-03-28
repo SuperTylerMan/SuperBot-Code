@@ -6,18 +6,18 @@ files out
 # basiccommands.js
 This file has all of the basic bot commands. These commands just send messages, and really have no special ability for the bot.
 
-The commands in this file are: b/help, b/changelog (Which I never update), b/ping, b/invite, b/botcode, b/devwebsite, b/website, b/vote and all of the b/info commands.
+The commands in this file are: b/help, b/changelog (Which I never update), b/ping, b/invite, b/botcode, b/devwebsite, b/website, b/vote, b/uptime and all of the b/info commands.
 It also hold the command b/changelog too for updates on the SuperBot!
 
 # moderationcommands.js
 This file has all of the moderation commands, and 1 command that should be in a different file. These commands have abilities to report players, kick, ban, or even clear messages.
 
-The commands in this file are b/report, b/clear, b/ban, b/kick, b/say (Ya, that should be in ectstuff.js), and b/permissions.
+The commands in this file are b/report, b/clear, b/ban, b/kick, b/announcement and b/permissions.
 
 # ectstuff.js
 This file has other commands that aren't really catagorized, and placed in this file.
 
-The commands in this file are b/poll, b/suggest, b/discordprofile, b/serverinfo, and a rule command for my SuperBot discord server, and Welcome/goodbye messages for my SuperBot support server. IDK why it is in there to be honest
+The commands in this file are b/poll, b/suggest, b/discordprofile, b/serverinfo, b/mcserverstatus, b/say (yay I actally moved it), b/sayembed and a rule command for my SuperBot discord server, and Welcome/goodbye messages for my SuperBot support server. IDK why it is in there to be honest
 
 # How to find the commands
 Each file I have a command base outline. It starts with "bot.on('message', message =>. That is always the way how I start new commands. The command code will usually end with a ) or a }. I usually keep a line or two between each command when I code it so I can seperate the code for the command, and make it way easier for me to find. If you see case '(command name)', the name is the actual command name of that command. That is the command when you type it in the chat. If it says case 'permissions', that mean the command name when you type it in chat is b/permissions
