@@ -5,18 +5,19 @@ This includes, suggestions, polls, server infos, and discord profile infos.
 
 const Discord = require('discord.js'); //without discord.js, the bot really cannot run -__-
 const dotenv = require('dotenv')
+const util = require('minecraft-server-util')
 const bot = new Discord.Client();
-const token = ("Place bot token here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
+const token = ("Place Bot Token Here") //This token is important, and this is what runs the bot properly. Without it, the bot will not run.
 const PREFIX = ('b/' || 'sb!') //This prefix is b/. Tried adding a new prefix, but it really doesn't work -__-
 var version = '1.2.0 (Stage Alpha)'; //This is the version of the bot. This is on top so I can change it anytime, without getting lost, and keep scrolling down, and down, and down...
 var help = 'This is being added soon...' //IDK WHY THIS IS HERE LEL!!!
 
 bot.on('ready', () =>{
-    console.log('ectstuff.js file is running.')
+    console.log('ectstuff.js file is running.') //Shows in terminal when the file is running
 })
 
-//This section right here is the discord profile section. This will fetch all the stuff from the server to the bot in numbers.
-//For channels, it will count Channels, Voice CHannels, and even categories! 
+//This section here is the sever info command. This fetches the info of the server as long as the bot has access to it
+//For channels, it will count Channels, Voice Channels, and even categories! (Thanks discord.js)
 //Its a bit buggy, but it displays it is a beautiful text that isnt to hard to read ;)
 
 var ServerInfo = '-All roles count is counting all roles, includng the ones that are hidden, even the roles when bot is installed to discord server.\n-All Channels count are 100% counted, even if they are hidden or not.'
@@ -29,14 +30,14 @@ bot.on('message', message =>{
         case 'serverinfo':
         const EmBEDED = new Discord.MessageEmbed()
         .setColor(0xFFC300)
-        .setTitle(`Here is the server info ${user}`)
-        .addField('Server Name:', message.guild.name)
-        .addField('Server Owner:', message.guild.owner)
-        .addField('Rules Channel:', message.guild.rulesChannel)
-        .addField('Server Members Count:', message.guild.memberCount + ' discord members in this server')
-        .addField('Server Roles Count:', message.guild.roles.cache.size + ' server roles in this server')
-        .addField('Channel Count:', message.guild.channels.cache.size + ' channels in this server (including categories, and voice channels. It is not super accurate. Thanks discord.js :grin: :grin: :grin:)')
-        .addField('Custom Emojis Count:', message.guild.emojis.cache.size + ' custom emojis in this server.')
+        .setTitle(`Here is the server info ${user}`) 
+        .addField('Server Name:', message.guild.name) //Fetches the server name 
+        .addField('Server Owner:', message.guild.owner) //Fetches the server owner 
+        .addField('Rules Channel:', message.guild.rulesChannel) //Fetches the rules channel on this server (If assigned. If not, output will be null (Means it doesn't exist))
+        .addField('Server Members Count:', message.guild.memberCount + ' discord members in this server') //Counts how many members are on the server, including bots
+        .addField('Server Roles Count:', message.guild.roles.cache.size + ' server roles in this server') //Counts how many roles are on the server, including bot roles
+        .addField('Channel Count:', message.guild.channels.cache.size + ' channels in this server (including categories, and voice channels. It is not super accurate. Thanks discord.js :grin: :grin: :grin:)') //Fetches all the channel, categories, and voice channels. Very inaccurate
+        .addField('Custom Emojis Count:', message.guild.emojis.cache.size + ' custom emojis in this server.') //Counts the custom emojis in the server, including animated ones like NITRO
         .setFooter('-If anything says null, that means that the information could not be obtained by the bot\n' + ServerInfo)
 
         if(!args[1])
@@ -45,68 +46,70 @@ bot.on('message', message =>{
     }
 })
 
-//This section right here is your discord profile. It will only display the users name (without #. Sorry) and their discord users ID.
-//Its a nice feature to add. Just not super special...
+//This section is the Discord Profile command. This shows the basic info of your profile.
+//This command can only be ran by you. It shows your discord ID (which is public to everyone who has developer mode on), and your username
+//and #. Thats it
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
-    let user = message.author.username
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type === 'dm')return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
         case 'discordprofile':
-            const EMBEDED04 = new Discord.MessageEmbed()
-            .setColor(0xFCC300)
-            .setTitle(`Here are your discord stats ${user}`)
-            .addField('Player Name', message.author.username) //Gets username from profile without #
-            .addField('Discord ID:', message.author.id) //Gets users discord ID and shows it in message.
-            .setFooter('This is what the bot will show in discord.js')
+        let user = message.member.user.tag //Shows your full username
+        let username = message.author.username //Shows only your username (not nick)
+        let hashtag = message.author.discriminator //Shows your hastag in the server
+        let filemebed = new Discord.MessageEmbed()
+        .setTitle(`Here is the discord stats of ${user}`)
+        .addField('Full Discord Name:', user) 
+        .addField('Discord Username:', username) 
+        .addField('Discord Hastag (Or disciminator)', hashtag) 
+        .addField('User ID:', message.author.id) //Shows your user ID 
+        .setColor(0xFCC300)
 
-            if(!args[1])
-            message.channel.send(EMBEDED04)
-            break;
+        message.channel.send(filemebed)
+        break;
+
     }
 })
 
 
 
-
-//This section here is a poll section. Here is the code of how this things work. There will be messages along the way to help you in 
-//a much less terrible way. I am brand new to JavaScript, so sorry if this code is terrible... You will see some coding is repreated here
-//so that the bot dosen't bug out that much. If there is any error here, please let me know.
+//This section here is the poll command. You can start a poll whenever and anyone can use it. Just please indicate the reactions so people
+//can react to the poll without any issues. 
 
 bot.on('message', message =>{
-    if(!message.content.startsWith(PREFIX) || message.author.bot)return; 
-    let args = message.content.substring(PREFIX.length).split (/ +/);
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type === 'dm')return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
 
     switch(args[0]){
-        case "poll":
-            const Embed = new Discord.MessageEmbed()
-            .setColor(0xFFC300)
-            .setTitle("Initiate a poll")
-            .setDescription("To initiate a poll, do `b/poll <Poll message>` to make a poll. You can make a yes or no poll, would you rather poll, or what should I play/do poll. When you make a poll, the poll will show reaction numbers 1️⃣ and 2️⃣. So please identify what ones your using for your poll your making, so the discord users do not get confused. Everyone can use this command. (When made, it will be sent in this channel when using command.)") //Poll Help description
-
+        case 'poll':
+            let pollembed = new Discord.MessageEmbed()
+            .setTitle('Creating a Poll')
+            .setDescription('To create a poll, do `b/poll <Poll>.`\nWhen creating a poll, please indicate what each one means. Set poll option one as :one: and set poll option two as :two: when creating the poll')
+            .setColor(0xFCC300)
             if(!args[1]){
-                message.channel.send(Embed); 
+                message.channel.send(pollembed)
                 break;
-                
             }
-            let msgArgs = args.slice(1).join(" ")
+            let user = message.member.user.tag //member sets player. User gets username, and tag gets # 
+            let msgArgs = args.slice(1).join(" ") //Gets text from user to display in the embed
             
-            let EMbeded01 = new Discord.MessageEmbed()
-            .setTitle(`We have a new poll!`)
-            .setDescription('**Poll:** ' + msgArgs + '\n_ _\nReact with :one: or :two:.')
+            let pollembed2 = new Discord.MessageEmbed()
+            .setTitle(`New poll from ${user}`)
+            .setDescription(msgArgs)
+            .setFooter('React with 1️⃣ and 2️⃣.' + `\nPoll created on the SuperBot! Try it out by doing b/poll`)
             .setColor(0xFCC300)
 
-                message.channel.send(EMbeded01).then(messageReaction =>{
-                    messageReaction.react('1️⃣')
-                    messageReaction.react('2️⃣')
-                    
-                })
-    }}
-);
+            message.channel.send(pollembed2).then(messageReaction =>{ //messageReaction sets the reaction for the messageReaction thing to work
+                messageReaction.react('1️⃣') //Whatever emoji you put here, it will create a reaction for players to react too 
+                messageReaction.react('2️⃣')
+            })
 
-//DONT ASK ME ANYTHING :) Rules
+    }
+})
+
+//This is the rules command for my SuperBot! Discord server. You can use it if you like, but I would not use it at all.
 
 var ruleesec1 = "**Chatting Rules**"
 var rulee1 = "**#1**: Do not Swear, or curse in this discord server at all!"
@@ -144,33 +147,23 @@ bot.on('message', message =>{
     }
 })
 
-//This next section right here is all moderation commands. These commands help with moderation. 
-//Note: THESE COMMANDS CAN ACTUALLY BAN PEOPLE FROM OTHER SERVERS WITHOUT HAVING ADMIN PERMISSIONS.
-//The bot is a bit buggy when I sometimes do the b/kick command. If it is that way, sorry...
-
-//The first one is b/kick. This only works for members and not bots. IF YOU KICK A BOT, THE BOT WILL SHUT DOWN. With an exit code 0...
-
-
-
-//This section here is the welcome section. It is a bit buggy, because I do not have a command where you can put this, and make custom
-//messages that the bot can see. 
-//I only set it in a channel, but after I finish up the first part of the BETA stuff, I will add it later on...
+//This section here is the welcome stuff. This is only designed for the SuperBot! Discord Server. I am hoping later in the future to make a
+//command that allows you to set your own custom channels on where to put it. 
 
 bot.on('guildMemberAdd', member =>{
 
-    const channel = member.guild.channels.cache.find(channel => channel.name === "traffic-welcome-goodbyes");
+    let channel = member.guild.channels.cache.find(channel => channel.name === "traffic-welcome-goodbyes");
     if(!channel) return;
 
     channel.send(`${member}, welcome to the SuperBot! Official Discord server! Please read the <#726846238627987577> before chatting. Thanks :wink:`)
 })
 
-//This section right here is the goodbye section. It is a bit buggy, because I do not have a command where you can put this. and make
-//goodbye message on your server. 
-//I did set it for my SuperBot! Discord server, but it will be added soon to everyone. Ill make custom commands for that soon...
+//This section if the goodbye command. This is only designed for the SuperBot! Discord Server! I am hoping later in the future to make a
+//command that allows you to set the goodbye message of where you want to put it
 
 bot.on('guildMemberRemove', member =>{
 
-    const channel = member.guild.channels.cache.find(channel => channel.name === "traffic-welcome-goodbyes");
+    let channel = member.guild.channels.cache.find(channel => channel.name === "traffic-welcome-goodbyes");
     if(!channel) return;
 
     channel.send(`${member} has left the official SuperBot discord server.`)
@@ -197,9 +190,9 @@ bot.on('message', message =>{
         break;
     } 
     let msgArgs = args.slice(1).join(" ")
-    let user = message.author.username
-    let SuggestionChannel = message.guild.channels.cache.find(channel => channel.name === 'suggestions')
-    if(!SuggestionChannel)return;
+    let user = message.member.user.tag
+    let SuggestionChannel = message.guild.channels.cache.find(channel => channel.name === 'suggestions') 
+    if(!SuggestionChannel)return message.channel.send('Sorry. We could not send that suggestion because there is no #suggestions channel.')
 
     let embeded02 = new Discord.MessageEmbed()
     .setTitle(`New Suggestion from ${user}!`)
@@ -207,17 +200,92 @@ bot.on('message', message =>{
     .setColor(0xFCC300)
     .setFooter('React with ✅ or ❌.\nSuggestion made from the SuperBot! Suggest something for the server by doing b/suggest')
 
-    if(!args[2, 10000]){
+    
         message.reply('Your suggestion has been recieved. Go to #suggestions to find it!')
         SuggestionChannel.send(embeded02).then(messageReaction =>{
             messageReaction.react("✅")
             messageReaction.react("❌") 
         })
-    } else {
-        message.channel.send('Error. Your suggestion was not sent because the server owner/admins did not set up a #suggestions channel.\nPlease contant the server admins/owner for more information. Thanks.')
-    break;
     }
     } 
+)
+
+//This section here is the b/say command. This was moved from the moderationcommands.js to ectstuff.js as it made NO SENSE AT ALL to place it
+//there. It just repeats the message of what you said. Its a fun nice little touch
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+
+    switch(args[0]){
+    case 'say':
+    if(!args[1]){
+    message.channel.send('**Want to repeat messages?**\nDo `b/say <message>`.')
+    break;
+    }
+    let msgArgs = args.slice(1).join(" ")
+    message.channel.send(msgArgs)
+    break;
+}
 })
 
-bot.login(token)
+//This section here is the b/mcserverstatus command. This pings the minecraft java edition server, and displays the server status in an embed
+//and shows how many players are online, and what requirements you need to play on that server.
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot)return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+
+    switch(args[0]){
+        case 'mcserverstatus':
+            if(!args[0]) return message.channel.send('**Get a Minecraft Server Status**\nTo get a Minecraft Server Status, do `b/mcservser <server adress> <server port>`');
+            if(!args[1]) return message.channel.send('**Get a Minecraft Server Status**\nTo get a Minecraft Server Status, do `b/mcservser <server adress> <server port>`\n*Note: This only works for Minecraft Java Servers. Not Minecraft Bedrock Servers.*');
+            util.status(args[1], {port: parseInt(args[2])}).then((response) =>{ //Sets the parameters for the minecraft server util to work in the embed below
+                let mcembed = new Discord.MessageEmbed()
+                .setColor(0xFCC300)
+                .setTitle('Mc server status')
+                .addField('Server IP:', response.host) //Gets the server IP after you placed it in the bot
+                .addField('Server Port:', response.port) //Gets the server port after you placed it in the bot
+                .addField('Server Description (MOTD):', response.description) //Gets the server message of the day, or what is currently displayed as
+                .addField('Online Players:', response.onlinePlayers) //How many players are online on that server
+                .addField('Max Players Allowed:', response.maxPlayers) //The MAX amount of players that are online
+                .addField('Required Version to Play:', response.version) //Version you must be in, in order to play on the server
+                    message.channel.send(mcembed);
+            })
+            .catch ((error) =>{ //If there is an error fetching the minecraft server, CATCH it, and display this message
+                message.channel.send('Sorry. There was an error finding that server. Please try again later.\n*Note, make sure you seperate the server adress and the server port apart. Or else, it may not work!*');
+            })
+        }
+})
+
+//This section is the sayembed command. This repeats the message in a nice embedded form. 
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(PREFIX) || message.author.bot || message.channel.type === 'dm')return;
+    let args = message.content.substring(PREFIX.length).split(/ +/)
+
+    switch(args[0]){
+        case 'sayembed':
+        let sayembed1 = new Discord.MessageEmbed()
+        .setTitle('Want to repeat your text into an embed???')
+        .setDescription('Do `b/sayembed <message>`')
+        .setColor(0xFCC300)
+        if(!args[1]){
+            message.channel.send(sayembed1)
+            break;
+        }
+
+        let msgArgs = args.slice(1).join(" ")
+        let sayembed2 = new Discord.MessageEmbed()
+        .setDescription(msgArgs)
+        .setColor(0xFCC300)
+
+        if(!args[2, 1000000]){
+            message.channel.send(sayembed2)
+            break;
+        }
+    }
+})
+
+bot.login(token) //Bot logins using the token. You can place the token down here if you want too
+//You made it to the end of the ectstuff.js file. Check out some other files if you want to see some other code as well
